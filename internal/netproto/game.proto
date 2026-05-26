@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package game;
+
+option go_package = "agentDemo/internal/netproto;netproto";
+
+enum EntityKind {
+  ENTITY_KIND_UNKNOWN = 0;
+  ENTITY_KIND_PLAYER = 1;
+  ENTITY_KIND_ENEMY = 2;
+  ENTITY_KIND_BULLET_PLAYER = 3;
+  ENTITY_KIND_BULLET_ENEMY = 4;
+}
+
+message Vec2 {
+  float x = 1;
+  float y = 2;
+}
+
+message JoinReq {
+  string name = 1;
+}
+
+message JoinResp {
+  uint32 player_id = 1;
+  uint64 session_id = 2;
+  uint32 udp_port = 3;
+  uint32 tick_hz = 4;
+}
+
+message ErrorMsg {
+  uint32 code = 1;
+  string message = 2;
+}
+
+message GameOver {
+  uint32 tick = 1;
+  int32 score = 2;
+}
+
+message TcpEnvelope {
+  oneof msg {
+    JoinReq join_req = 1;
+    JoinResp join_resp = 2;
+    ErrorMsg error = 3;
+    GameOver game_over = 4;
+  }
+}
+
+message UdpHello {
+  uint64 session_id = 1;
+}
+
+message InputFrame {
+  uint32 input_seq = 1;
+  int32 move_x = 2;
+  int32 move_y = 3;
+  bool fire = 4;
+  float aim_dx = 5;
+  float aim_dy = 6;
+}
+
+message EntityState {
+  uint32 net_id = 1;
+  EntityKind kind = 2;
+  uint32 owner_player_id = 3;
+  Vec2 pos = 4;
+  Vec2 vel = 5;
+  int32 hp = 6;
+  float radius = 7;
+}
+
+message ImpactEvent {
+  uint32 bullet_net_id = 1;
+  EntityKind bullet_kind = 2;
+  uint32 source_player_id = 3;
+  uint32 target_net_id = 4;
+  EntityKind target_kind = 5;
+  Vec2 pos = 6;
+  int32 damage = 7;
+  bool target_destroyed = 8;
+}
+
+message Snapshot {
+  uint32 tick = 1;
+  uint32 last_processed_input_seq = 2;
+  int32 score = 3;
+  bool running = 4;
+  repeated EntityState entities = 5;
+  repeated ImpactEvent impacts = 6;
+}
+
+message UdpEnvelope {
+  uint64 session_id = 1;
+  oneof msg {
+    UdpHello hello = 10;
+    InputFrame input = 11;
+    Snapshot snapshot = 12;
+  }
+}

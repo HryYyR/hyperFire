@@ -1,0 +1,5 @@
+/pkg/
+*.txt
+*.exe
+/.gocache/
+/.idea/
