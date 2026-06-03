@@ -1,0 +1,396 @@
+[
+  {
+    "id": "effect_poison_on_hit_l1",
+    "name": "剧毒命中 I",
+    "description": "攻击命中后附加中毒。",
+    "ui": {
+      "title": "剧毒命中 I",
+      "summary": "攻击命中后附加中毒。",
+      "description": "每 10 tick 结算 1 次 1 点中毒伤害，持续 3 秒，最多 3 层。",
+      "icon": "effect_poison",
+      "rarity": "common",
+      "sort_order": 101,
+      "tags": ["毒", "持续伤害", "命中触发"]
+    },
+    "trigger": "on_attack_hit",
+    "kind": "apply_status_on_hit",
+    "apply_status_on_hit": {
+      "status": "poison",
+      "category": "dot",
+      "stacking_rule": "additive",
+      "dot": {
+        "damage_per_tick": 1,
+        "tick_interval_ticks": 10,
+        "duration_seconds": 3.0,
+        "max_stacks": 3
+      }
+    }
+  },
+  {
+    "id": "effect_poison_on_hit_l2",
+    "name": "剧毒命中 II",
+    "description": "攻击命中后附加更强的中毒。",
+    "ui": {
+      "title": "剧毒命中 II",
+      "summary": "攻击命中后附加更强的中毒。",
+      "description": "每 10 tick 结算 1 次 2 点中毒伤害，持续 3.5 秒，最多 4 层。",
+      "icon": "effect_poison",
+      "rarity": "common",
+      "sort_order": 102,
+      "tags": ["毒", "持续伤害", "命中触发"]
+    },
+    "trigger": "on_attack_hit",
+    "kind": "apply_status_on_hit",
+    "apply_status_on_hit": {
+      "status": "poison",
+      "category": "dot",
+      "stacking_rule": "additive",
+      "dot": {
+        "damage_per_tick": 2,
+        "tick_interval_ticks": 10,
+        "duration_seconds": 3.5,
+        "max_stacks": 4
+      }
+    }
+  },
+  {
+    "id": "effect_poison_on_hit_l3",
+    "name": "剧毒命中 III",
+    "description": "攻击命中后附加高阶中毒。",
+    "ui": {
+      "title": "剧毒命中 III",
+      "summary": "攻击命中后附加高阶中毒。",
+      "description": "每 8 tick 结算 1 次 3 点中毒伤害，持续 4 秒，最多 5 层。",
+      "icon": "effect_poison",
+      "rarity": "rare",
+      "sort_order": 103,
+      "tags": ["毒", "持续伤害", "命中触发"]
+    },
+    "trigger": "on_attack_hit",
+    "kind": "apply_status_on_hit",
+    "apply_status_on_hit": {
+      "status": "poison",
+      "category": "dot",
+      "stacking_rule": "additive",
+      "dot": {
+        "damage_per_tick": 3,
+        "tick_interval_ticks": 8,
+        "duration_seconds": 4.0,
+        "max_stacks": 5
+      }
+    }
+  },
+  {
+    "id": "effect_chill_on_hit_l1",
+    "name": "寒冷命中 I",
+    "description": "攻击命中后附加减速。",
+    "ui": {
+      "title": "寒冷命中 I",
+      "summary": "攻击命中后附加减速。",
+      "description": "命中后使目标移速降至 85%，持续 1.5 秒。",
+      "icon": "effect_chill",
+      "rarity": "common",
+      "sort_order": 201,
+      "tags": ["寒冷", "减速", "控制"]
+    },
+    "trigger": "on_attack_hit",
+    "kind": "apply_status_on_hit",
+    "apply_status_on_hit": {
+      "status": "chill",
+      "category": "control",
+      "stacking_rule": "none",
+      "chill": {
+        "move_speed_multiplier": 0.85,
+        "duration_seconds": 1.5
+      }
+    }
+  },
+  {
+    "id": "effect_chill_on_hit_l2",
+    "name": "寒冷命中 II",
+    "description": "攻击命中后附加更强的减速。",
+    "ui": {
+      "title": "寒冷命中 II",
+      "summary": "攻击命中后附加更强的减速。",
+      "description": "命中后使目标移速降至 70%，持续 2 秒。",
+      "icon": "effect_chill",
+      "rarity": "common",
+      "sort_order": 202,
+      "tags": ["寒冷", "减速", "控制"]
+    },
+    "trigger": "on_attack_hit",
+    "kind": "apply_status_on_hit",
+    "apply_status_on_hit": {
+      "status": "chill",
+      "category": "control",
+      "stacking_rule": "none",
+      "chill": {
+        "move_speed_multiplier": 0.7,
+        "duration_seconds": 2.0
+      }
+    }
+  },
+  {
+    "id": "effect_chill_on_hit_l3",
+    "name": "寒冷命中 III",
+    "description": "攻击命中后附加强力减速。",
+    "ui": {
+      "title": "寒冷命中 III",
+      "summary": "攻击命中后附加强力减速。",
+      "description": "命中后使目标移速降至 55%，持续 2.5 秒。",
+      "icon": "effect_chill",
+      "rarity": "rare",
+      "sort_order": 203,
+      "tags": ["寒冷", "减速", "控制"]
+    },
+    "trigger": "on_attack_hit",
+    "kind": "apply_status_on_hit",
+    "apply_status_on_hit": {
+      "status": "chill",
+      "category": "control",
+      "stacking_rule": "none",
+      "chill": {
+        "move_speed_multiplier": 0.55,
+        "duration_seconds": 2.5
+      }
+    }
+  },
+  {
+    "id": "effect_homing_shot_on_fire_l1",
+    "name": "追踪副弹 I",
+    "description": "每 5 次射击额外发射 1 颗追踪子弹。",
+    "ui": {
+      "title": "追踪副弹 I",
+      "summary": "每 5 次射击额外发射 1 颗追踪子弹。",
+      "description": "追踪弹搜敌范围 10，子弹速度为基准速度的 100%。",
+      "icon": "effect_homing",
+      "rarity": "rare",
+      "sort_order": 301,
+      "tags": ["追踪", "额外射击", "射击触发"]
+    },
+    "trigger": "on_shot_fired",
+    "kind": "bonus_homing_shot_on_fire",
+    "bonus_homing_shot_on_fire": {
+      "trigger_every_shots": 5,
+      "search_radius": 10.0,
+      "bullet_speed_scale": 1.0
+    }
+  },
+  {
+    "id": "effect_homing_shot_on_fire_l2",
+    "name": "追踪副弹 II",
+    "description": "每 4 次射击额外发射 1 颗追踪子弹。",
+    "ui": {
+      "title": "追踪副弹 II",
+      "summary": "每 4 次射击额外发射 1 颗追踪子弹。",
+      "description": "追踪弹搜敌范围 12，子弹速度为基准速度的 100%。",
+      "icon": "effect_homing",
+      "rarity": "rare",
+      "sort_order": 302,
+      "tags": ["追踪", "额外射击", "射击触发"]
+    },
+    "trigger": "on_shot_fired",
+    "kind": "bonus_homing_shot_on_fire",
+    "bonus_homing_shot_on_fire": {
+      "trigger_every_shots": 4,
+      "search_radius": 12.0,
+      "bullet_speed_scale": 1.0
+    }
+  },
+  {
+    "id": "effect_homing_shot_on_fire_l3",
+    "name": "追踪副弹 III",
+    "description": "每 3 次射击额外发射 1 颗追踪子弹。",
+    "ui": {
+      "title": "追踪副弹 III",
+      "summary": "每 3 次射击额外发射 1 颗追踪子弹。",
+      "description": "追踪弹搜敌范围 14，子弹速度为基准速度的 100%。",
+      "icon": "effect_homing",
+      "rarity": "epic",
+      "sort_order": 303,
+      "tags": ["追踪", "额外射击", "射击触发"]
+    },
+    "trigger": "on_shot_fired",
+    "kind": "bonus_homing_shot_on_fire",
+    "bonus_homing_shot_on_fire": {
+      "trigger_every_shots": 3,
+      "search_radius": 14.0,
+      "bullet_speed_scale": 1.0
+    }
+  }
+,
+  {
+    "id": "effect_bonus_roll_charges_l1",
+    "name": "翻滚存量 I",
+    "description": "额外增加 1 次翻滚存量。",
+    "ui": {
+      "title": "翻滚存量 I",
+      "summary": "额外增加 1 次翻滚存量。",
+      "description": "使翻滚最大充能 +1。",
+      "icon": "effect_roll_charges",
+      "rarity": "common",
+      "sort_order": 401,
+      "tags": ["翻滚", "充能", "被动"]
+    },
+    "trigger": "passive",
+    "kind": "bonus_roll_charges",
+    "bonus_roll_charges": {
+      "extra_charges": 1
+    }
+  },
+  {
+    "id": "effect_bonus_roll_charges_l2",
+    "name": "翻滚存量 II",
+    "description": "额外增加 2 次翻滚存量。",
+    "ui": {
+      "title": "翻滚存量 II",
+      "summary": "额外增加 2 次翻滚存量。",
+      "description": "使翻滚最大充能 +2。",
+      "icon": "effect_roll_charges",
+      "rarity": "rare",
+      "sort_order": 402,
+      "tags": ["翻滚", "充能", "被动"]
+    },
+    "trigger": "passive",
+    "kind": "bonus_roll_charges",
+    "bonus_roll_charges": {
+      "extra_charges": 2
+    }
+  },
+  {
+    "id": "effect_bonus_roll_charges_l3",
+    "name": "翻滚存量 III",
+    "description": "额外增加 3 次翻滚存量。",
+    "ui": {
+      "title": "翻滚存量 III",
+      "summary": "额外增加 3 次翻滚存量。",
+      "description": "使翻滚最大充能 +3。",
+      "icon": "effect_roll_charges",
+      "rarity": "epic",
+      "sort_order": 403,
+      "tags": ["翻滚", "充能", "被动"]
+    },
+    "trigger": "passive",
+    "kind": "bonus_roll_charges",
+    "bonus_roll_charges": {
+      "extra_charges": 3
+    }
+  },
+  {
+    "id": "effect_restore_health_on_kill_l1",
+    "name": "击杀回复 I",
+    "description": "击杀敌人时，恢复生命上限的 0.5%，最低 1 点。",
+    "ui": {
+      "title": "击杀回复 I",
+      "summary": "击杀敌人时回复少量生命。",
+      "description": "每次击杀恢复生命上限的 0.5%，最低 1 点。",
+      "icon": "effect_kill_heal",
+      "rarity": "common",
+      "sort_order": 501,
+      "tags": ["击杀", "回复", "被动"]
+    },
+    "trigger": "on_enemy_kill",
+    "kind": "restore_health_on_kill",
+    "restore_health_on_kill": {
+      "max_health_percent": 0.005,
+      "min_heal": 1
+    }
+  },
+  {
+    "id": "effect_restore_health_on_kill_l2",
+    "name": "击杀回复 II",
+    "description": "击杀敌人时，恢复生命上限的 1%，最低 1 点。",
+    "ui": {
+      "title": "击杀回复 II",
+      "summary": "击杀敌人时回复更多生命。",
+      "description": "每次击杀恢复生命上限的 1%，最低 1 点。",
+      "icon": "effect_kill_heal",
+      "rarity": "rare",
+      "sort_order": 502,
+      "tags": ["击杀", "回复", "被动"]
+    },
+    "trigger": "on_enemy_kill",
+    "kind": "restore_health_on_kill",
+    "restore_health_on_kill": {
+      "max_health_percent": 0.01,
+      "min_heal": 1
+    }
+  },
+  {
+    "id": "effect_restore_health_on_kill_l3",
+    "name": "击杀回复 III",
+    "description": "击杀敌人时，恢复生命上限的 1.5%，最低 1 点。",
+    "ui": {
+      "title": "击杀回复 III",
+      "summary": "击杀敌人时回复大量生命。",
+      "description": "每次击杀恢复生命上限的 1.5%，最低 1 点。",
+      "icon": "effect_kill_heal",
+      "rarity": "epic",
+      "sort_order": 503,
+      "tags": ["击杀", "回复", "被动"]
+    },
+    "trigger": "on_enemy_kill",
+    "kind": "restore_health_on_kill",
+    "restore_health_on_kill": {
+      "max_health_percent": 0.015,
+      "min_heal": 1
+    }
+  },
+  {
+    "id": "effect_max_health_scale_l1",
+    "name": "生命强化 I",
+    "description": "生命上限提高 10%。",
+    "ui": {
+      "title": "生命强化 I",
+      "summary": "生命上限提高 10%。",
+      "description": "使生命上限提高到基础值的 110%。",
+      "icon": "effect_max_health",
+      "rarity": "common",
+      "sort_order": 601,
+      "tags": ["生命", "生存", "被动"]
+    },
+    "trigger": "passive",
+    "kind": "max_health_scale",
+    "max_health_scale": {
+      "percent": 0.1
+    }
+  },
+  {
+    "id": "effect_max_health_scale_l2",
+    "name": "生命强化 II",
+    "description": "生命上限提高 30%。",
+    "ui": {
+      "title": "生命强化 II",
+      "summary": "生命上限提高 30%。",
+      "description": "使生命上限提高到基础值的 130%。",
+      "icon": "effect_max_health",
+      "rarity": "rare",
+      "sort_order": 602,
+      "tags": ["生命", "生存", "被动"]
+    },
+    "trigger": "passive",
+    "kind": "max_health_scale",
+    "max_health_scale": {
+      "percent": 0.3
+    }
+  },
+  {
+    "id": "effect_max_health_scale_l3",
+    "name": "生命强化 III",
+    "description": "生命上限提高 50%。",
+    "ui": {
+      "title": "生命强化 III",
+      "summary": "生命上限提高 50%。",
+      "description": "使生命上限提高到基础值的 150%。",
+      "icon": "effect_max_health",
+      "rarity": "epic",
+      "sort_order": 603,
+      "tags": ["生命", "生存", "被动"]
+    },
+    "trigger": "passive",
+    "kind": "max_health_scale",
+    "max_health_scale": {
+      "percent": 0.5
+    }
+  }
+]

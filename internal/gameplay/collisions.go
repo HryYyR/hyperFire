@@ -50,13 +50,25 @@ func findNearestTargetInRadius(fromX, fromY float64, targets []TargetSnapshot, r
 func calcAimVelocity(fromX, fromY, toX, toY, speed float64) (float64, float64, bool) {
 	dx := toX - fromX
 	dy := toY - fromY
-	dist2 := dx*dx + dy*dy
+	dirX, dirY, ok := normalizeVector(dx, dy)
+	if !ok {
+		return 0, 0, false
+	}
+	return dirX * speed, dirY * speed, true
+}
+
+func normalizeVector(x, y float64) (float64, float64, bool) {
+	dist2 := x*x + y*y
 	if dist2 <= 0.0001 {
 		return 0, 0, false
 	}
 
 	dist := math.Sqrt(dist2)
-	return dx / dist * speed, dy / dist * speed, true
+	return x / dist, y / dist, true
+}
+
+func perpendicularLeft(x, y float64) (float64, float64) {
+	return -y, x
 }
 
 func collectSweepHitEvents(bullets []BulletSnapshot, targets []HitTargetSnapshot) ([]HitEvent, map[uint32]ecs.Entity) {
@@ -65,12 +77,11 @@ func collectSweepHitEvents(bullets []BulletSnapshot, targets []HitTargetSnapshot
 
 	for _, bullet := range bullets {
 		for _, target := range targets {
+			if shouldIgnoreHit(bullet, target) {
+				continue
+			}
 			if judgeSweepHit(bullet.PrevX, bullet.PrevY, bullet.X, bullet.Y, target.X, target.Y, bullet.Radius, target.Radius) {
-				hitEvents = append(hitEvents, HitEvent{
-					Bullet: bullet.Entity,
-					Target: target.Entity,
-					Damage: bullet.Damage,
-				})
+				hitEvents = append(hitEvents, buildHitEvent(bullet, target))
 				bulletsToRemove[bullet.Entity.ID()] = bullet.Entity
 			}
 		}
@@ -85,12 +96,11 @@ func collectDiscreteHitEvents(bullets []BulletSnapshot, targets []HitTargetSnaps
 
 	for _, bullet := range bullets {
 		for _, target := range targets {
+			if shouldIgnoreHit(bullet, target) {
+				continue
+			}
 			if judgeHit(bullet.X, bullet.Y, target.X, target.Y, bullet.Radius, target.Radius) {
-				hitEvents = append(hitEvents, HitEvent{
-					Bullet: bullet.Entity,
-					Target: target.Entity,
-					Damage: bullet.Damage,
-				})
+				hitEvents = append(hitEvents, buildHitEvent(bullet, target))
 				bulletsToRemove[bullet.Entity.ID()] = bullet.Entity
 			}
 		}
@@ -122,12 +132,11 @@ func collectSampledHitEvents(bullets []BulletSnapshot, targets []HitTargetSnapsh
 			sampleX := bullet.PrevX + dx*t
 			sampleY := bullet.PrevY + dy*t
 			for _, target := range targets {
+				if shouldIgnoreHit(bullet, target) {
+					continue
+				}
 				if judgeHit(sampleX, sampleY, target.X, target.Y, bullet.Radius, target.Radius) {
-					hitEvents = append(hitEvents, HitEvent{
-						Bullet: bullet.Entity,
-						Target: target.Entity,
-						Damage: bullet.Damage,
-					})
+					hitEvents = append(hitEvents, buildHitEvent(bullet, target))
 					bulletsToRemove[bullet.Entity.ID()] = bullet.Entity
 					hit = true
 					break
@@ -137,6 +146,43 @@ func collectSampledHitEvents(bullets []BulletSnapshot, targets []HitTargetSnapsh
 	}
 
 	return hitEvents, bulletsToRemove
+}
+
+func shouldIgnoreHit(bullet BulletSnapshot, target HitTargetSnapshot) bool {
+	return bullet.OwnerPlayerID != 0 && bullet.OwnerPlayerID == target.OwnerPlayerID
+}
+
+func buildHitEvent(bullet BulletSnapshot, target HitTargetSnapshot) HitEvent {
+	knockbackX, knockbackY := calcKnockbackVector(bullet, target)
+	return HitEvent{
+		Bullet:       bullet.Entity,
+		Target:       target.Entity,
+		Damage:       bullet.Damage,
+		KnockbackX:   knockbackX,
+		KnockbackY:   knockbackY,
+		OnHitEffects: cloneEffectConfigs(bullet.OnHitEffects),
+	}
+}
+
+func calcKnockbackVector(bullet BulletSnapshot, target HitTargetSnapshot) (float64, float64) {
+	if bullet.Knockback <= 0 {
+		return 0, 0
+	}
+
+	dx := bullet.X - bullet.PrevX
+	dy := bullet.Y - bullet.PrevY
+	if dx*dx+dy*dy <= 0.0001 {
+		dx = target.X - bullet.PrevX
+		dy = target.Y - bullet.PrevY
+	}
+
+	dist2 := dx*dx + dy*dy
+	if dist2 <= 0.0001 {
+		return 0, 0
+	}
+
+	dist := math.Sqrt(dist2)
+	return dx / dist * bullet.Knockback, dy / dist * bullet.Knockback
 }
 
 func judgeSweepHit(fromX, fromY, toX, toY, targetX, targetY, bulletRadiusValue, targetRadiusValue float64) bool {

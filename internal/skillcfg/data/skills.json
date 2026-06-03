@@ -1,0 +1,283 @@
+[
+  {
+    "id": "skill_toxic_rounds_1",
+    "name": "剧毒子弹",
+    "description": "攻击命中后附加中毒。",
+    "ui": {
+      "title": "剧毒子弹",
+      "summary": "攻击命中后附加中毒。",
+      "description": "偏向持续消耗的子弹附魔技能，可通过升级提升中毒伤害、频率与叠层上限。",
+      "icon": "skill_toxic_rounds",
+      "rarity": "common",
+      "sort_order": 1001,
+      "tags": ["毒", "持续伤害", "子弹附魔"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_poison_on_hit_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "命中附加 1 点中毒，每 10 tick 结算一次，持续 3 秒，最多 3 层。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_poison_on_hit_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "命中附加 2 点中毒，每 10 tick 结算一次，持续 3.5 秒，最多 4 层。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_poison_on_hit_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "命中附加 3 点中毒，每 8 tick 结算一次，持续 4 秒，最多 5 层。"
+        }
+      }
+    ]
+  },
+  {
+    "id": "skill_frost_rounds_1",
+    "name": "寒冰子弹",
+    "description": "攻击命中后附加减速。",
+    "ui": {
+      "title": "寒冰子弹",
+      "summary": "攻击命中后附加减速。",
+      "description": "偏向控场的子弹附魔技能，可通过升级提升减速强度与持续时间。",
+      "icon": "skill_frost_rounds",
+      "rarity": "common",
+      "sort_order": 1002,
+      "tags": ["冰", "减速", "控制", "子弹附魔"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_chill_on_hit_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "命中使目标移速降至 85%，持续 1.5 秒。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_chill_on_hit_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "命中使目标移速降至 70%，持续 2 秒。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_chill_on_hit_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "命中使目标移速降至 55%，持续 2.5 秒。"
+        }
+      }
+    ]
+  },
+  {
+    "id": "skill_venom_frost_rounds",
+    "name": "霜毒子弹",
+    "description": "攻击命中后同时施加中毒与减速。",
+    "ui": {
+      "title": "霜毒子弹",
+      "summary": "攻击命中后同时施加中毒与减速。",
+      "description": "兼具持续伤害与控制能力的复合型技能，适合做多效果构筑核心。",
+      "icon": "skill_venom_frost_rounds",
+      "rarity": "rare",
+      "sort_order": 1003,
+      "tags": ["毒", "冰", "复合", "持续伤害", "控制"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_poison_on_hit_l1", "effect_chill_on_hit_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "命中时同时附加 Lv.1 中毒与 Lv.1 寒冷。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_poison_on_hit_l2", "effect_chill_on_hit_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "命中时同时附加 Lv.2 中毒与 Lv.2 寒冷。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_poison_on_hit_l3", "effect_chill_on_hit_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "命中时同时附加 Lv.3 中毒与 Lv.3 寒冷。"
+        }
+      }
+    ]
+  },
+  {
+    "id": "skill_homing_rounds_1",
+    "name": "追踪轮射",
+    "description": "间隔数次射击后发射额外追踪弹。",
+    "ui": {
+      "title": "追踪轮射",
+      "summary": "间隔数次射击后发射额外追踪弹。",
+      "description": "用于补足自动索敌能力的射击技能，升级后会更频繁地触发，且搜敌范围更大。",
+      "icon": "skill_homing_rounds",
+      "rarity": "epic",
+      "sort_order": 1004,
+      "tags": ["追踪", "额外射击", "周期触发"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_homing_shot_on_fire_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "每 5 次射击额外发射 1 颗搜敌范围 10 的追踪弹。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_homing_shot_on_fire_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "每 4 次射击额外发射 1 颗搜敌范围 12 的追踪弹。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_homing_shot_on_fire_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "每 3 次射击额外发射 1 颗搜敌范围 14 的追踪弹。"
+        }
+      }
+    ]
+  }
+,
+  {
+    "id": "skill_roll_reserve",
+    "name": "翻滚存量",
+    "description": "提高可连续使用的翻滚次数。",
+    "ui": {
+      "title": "翻滚存量",
+      "summary": "提高可连续使用的翻滚次数。",
+      "description": "偏向机动性的被动技能，升级后会让翻滚充能上限更高。",
+      "icon": "skill_roll_reserve",
+      "rarity": "rare",
+      "sort_order": 1005,
+      "tags": ["翻滚", "机动", "被动"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_bonus_roll_charges_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "翻滚最大充能 +1。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_bonus_roll_charges_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "翻滚最大充能 +2。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_bonus_roll_charges_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "翻滚最大充能 +3。"
+        }
+      }
+    ]
+  },
+  {
+    "id": "skill_kill_heal",
+    "name": "收割回复",
+    "description": "击杀敌人时恢复生命。",
+    "ui": {
+      "title": "收割回复",
+      "summary": "击杀敌人时恢复生命。",
+      "description": "偏向续航的被动技能，升级后会提高每次击杀的回复量。",
+      "icon": "skill_kill_heal",
+      "rarity": "rare",
+      "sort_order": 1006,
+      "tags": ["击杀", "回复", "续航", "被动"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_restore_health_on_kill_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "击杀敌人时恢复生命上限的 0.5%，最低 1 点。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_restore_health_on_kill_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "击杀敌人时恢复生命上限的 1%，最低 1 点。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_restore_health_on_kill_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "击杀敌人时恢复生命上限的 1.5%，最低 1 点。"
+        }
+      }
+    ]
+  },
+  {
+    "id": "skill_vitality_boost",
+    "name": "生命强化",
+    "description": "提高生命上限。",
+    "ui": {
+      "title": "生命强化",
+      "summary": "提高生命上限。",
+      "description": "偏向生存能力的被动技能，升级后会显著提高生命上限。",
+      "icon": "skill_vitality_boost",
+      "rarity": "rare",
+      "sort_order": 1007,
+      "tags": ["生命", "生存", "被动"]
+    },
+    "levels": [
+      {
+        "level": 1,
+        "effect_ids": ["effect_max_health_scale_l1"],
+        "ui": {
+          "label": "Lv.1",
+          "description": "生命上限提高 10%。"
+        }
+      },
+      {
+        "level": 2,
+        "effect_ids": ["effect_max_health_scale_l2"],
+        "ui": {
+          "label": "Lv.2",
+          "description": "生命上限提高 30%。"
+        }
+      },
+      {
+        "level": 3,
+        "effect_ids": ["effect_max_health_scale_l3"],
+        "ui": {
+          "label": "Lv.3",
+          "description": "生命上限提高 50%。"
+        }
+      }
+    ]
+  }
+]

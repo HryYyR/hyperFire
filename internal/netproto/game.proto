@@ -10,6 +10,45 @@ enum EntityKind {
   ENTITY_KIND_ENEMY = 2;
   ENTITY_KIND_BULLET_PLAYER = 3;
   ENTITY_KIND_BULLET_ENEMY = 4;
+  ENTITY_KIND_PICKUP_EXP = 5;
+  ENTITY_KIND_PICKUP_SKILL = 6;
+}
+
+enum EnemyClass {
+  ENEMY_CLASS_UNKNOWN = 0;
+  ENEMY_CLASS_GUNNER = 1;
+  ENEMY_CLASS_BLADE = 2;
+}
+
+enum EnemyTier {
+  ENEMY_TIER_UNKNOWN = 0;
+  ENEMY_TIER_MINION = 1;
+  ENEMY_TIER_ELITE = 2;
+  ENEMY_TIER_BOSS = 3;
+}
+
+enum BuffKind {
+  BUFF_KIND_UNKNOWN = 0;
+  BUFF_KIND_POISON = 1;
+  BUFF_KIND_CHILL = 2;
+}
+
+enum BuffCategory {
+  BUFF_CATEGORY_UNKNOWN = 0;
+  BUFF_CATEGORY_DOT = 1;
+  BUFF_CATEGORY_CONTROL = 2;
+}
+
+enum ProjectileSubtype {
+  PROJECTILE_SUBTYPE_UNKNOWN = 0;
+  PROJECTILE_SUBTYPE_NORMAL = 1;
+  PROJECTILE_SUBTYPE_HOMING = 2;
+}
+
+enum EnemyAggroState {
+  ENEMY_AGGRO_STATE_IDLE = 0;
+  ENEMY_AGGRO_STATE_WATCHING = 1;
+  ENEMY_AGGRO_STATE_LOCKED = 2;
 }
 
 message Vec2 {
@@ -28,6 +67,27 @@ message JoinResp {
   uint32 tick_hz = 4;
 }
 
+message RespawnReq {}
+
+message RespawnResp {
+  uint32 player_id = 1;
+  bool accepted = 2;
+  string message = 3;
+}
+
+message ChooseSkillReq {
+  uint32 choice_sequence = 1;
+  string skill_id = 2;
+}
+
+message ChooseSkillResp {
+  uint32 player_id = 1;
+  uint32 choice_sequence = 2;
+  bool accepted = 3;
+  bool granted = 4;
+  string message = 5;
+}
+
 message ErrorMsg {
   uint32 code = 1;
   string message = 2;
@@ -44,6 +104,10 @@ message TcpEnvelope {
     JoinResp join_resp = 2;
     ErrorMsg error = 3;
     GameOver game_over = 4;
+    RespawnReq respawn_req = 5;
+    RespawnResp respawn_resp = 6;
+    ChooseSkillReq choose_skill_req = 7;
+    ChooseSkillResp choose_skill_resp = 8;
   }
 }
 
@@ -58,6 +122,32 @@ message InputFrame {
   bool fire = 4;
   float aim_dx = 5;
   float aim_dy = 6;
+  bool roll = 7;
+  uint32 acked_snapshot_tick = 8;
+}
+
+message BuffState {
+  BuffKind kind = 1;
+  uint32 remaining_frames = 2;
+  uint32 tick_interval_frames = 3;
+  uint32 tick_frames_remaining = 4;
+  int32 damage_per_tick = 5;
+  float move_speed_multiplier = 6;
+  BuffCategory category = 7;
+  uint32 stacks = 8;
+  uint32 max_stacks = 9;
+}
+
+message SkillOption {
+  string skill_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message PendingSkillChoice {
+  uint32 sequence = 1;
+  uint32 target_level = 2;
+  repeated SkillOption options = 3;
 }
 
 message EntityState {
@@ -67,7 +157,20 @@ message EntityState {
   Vec2 pos = 4;
   Vec2 vel = 5;
   int32 hp = 6;
+  int32 hp_max = 20;
   float radius = 7;
+  int32 exp = 8;
+  EnemyClass enemy_class = 9;
+  repeated BuffState buffs = 10;
+  ProjectileSubtype projectile_subtype = 11;
+  string skill_id = 12;
+  EnemyAggroState enemy_aggro_state = 13;
+  uint32 aggro_target_player_id = 14;
+  uint32 aggro_watch_frames = 15;
+  uint32 aggro_watch_total_frames = 16;
+  EnemyTier enemy_tier = 17;
+  uint32 spawn_remaining_frames = 18;
+  uint32 spawn_total_frames = 19;
 }
 
 message ImpactEvent {
@@ -81,6 +184,25 @@ message ImpactEvent {
   bool target_destroyed = 8;
 }
 
+message PickupEvent {
+  uint32 collector_net_id = 1;
+  EntityKind collector_kind = 2;
+  uint32 collector_player_id = 3;
+  uint32 pickup_net_id = 4;
+  EntityKind pickup_kind = 5;
+  Vec2 pos = 6;
+  int32 exp_value = 7;
+  string skill_id = 8;
+  bool granted = 9;
+}
+
+message HordeStatus {
+  int32 value = 1;
+  int32 threshold = 2;
+  bool active = 3;
+  uint32 remaining_frames = 4;
+}
+
 message Snapshot {
   uint32 tick = 1;
   uint32 last_processed_input_seq = 2;
@@ -88,6 +210,13 @@ message Snapshot {
   bool running = 4;
   repeated EntityState entities = 5;
   repeated ImpactEvent impacts = 6;
+  uint32 player_level = 7;
+  repeated PendingSkillChoice pending_skill_choices = 8;
+  uint32 base_tick = 9;
+  bool is_full = 10;
+  repeated uint32 removed_net_ids = 11;
+  repeated PickupEvent pickup_events = 12;
+  HordeStatus horde = 13;
 }
 
 message UdpEnvelope {

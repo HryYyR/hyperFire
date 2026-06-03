@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"sync/atomic"
 	"time"
 
 	"agentDemo/internal/gameplay"
@@ -31,8 +30,6 @@ type Server struct {
 	world    *gameplay.Runtime
 
 	logger *log.Logger
-
-	gameOverSent atomic.Bool
 }
 
 func New(cfg Config, logger *log.Logger) *Server {
@@ -172,7 +169,56 @@ func (s *Server) handleTCPConn(conn net.Conn) {
 					Error: &netproto.ErrorMsg{Code: 409, Message: "join already completed"},
 				},
 			})
+			continue
 		}
+		if envelope.GetRespawnReq() != nil {
+			s.handleRespawnReq(sess)
+			continue
+		}
+		if req := envelope.GetChooseSkillReq(); req != nil {
+			s.handleChooseSkillReq(sess, req)
+			continue
+		}
+	}
+}
+
+func (s *Server) handleRespawnReq(sess *session.Session) {
+	accepted := s.world.RespawnPlayer(sess.PlayerID)
+	message := "player respawned"
+	if !accepted {
+		message = "respawn rejected: player is still alive or missing"
+	}
+
+	err := transport.WriteTCPEnvelope(sess.TCPConn, &netproto.TcpEnvelope{
+		Msg: &netproto.TcpEnvelope_RespawnResp{
+			RespawnResp: &netproto.RespawnResp{
+				PlayerId: sess.PlayerID,
+				Accepted: accepted,
+				Message:  message,
+			},
+		},
+	})
+	if err != nil {
+		s.logger.Printf("respawn response failed player_id=%d err=%v", sess.PlayerID, err)
+	}
+}
+
+func (s *Server) handleChooseSkillReq(sess *session.Session, req *netproto.ChooseSkillReq) {
+	result := s.world.ChoosePlayerSkill(sess.PlayerID, req.GetChoiceSequence(), req.GetSkillId())
+
+	err := transport.WriteTCPEnvelope(sess.TCPConn, &netproto.TcpEnvelope{
+		Msg: &netproto.TcpEnvelope_ChooseSkillResp{
+			ChooseSkillResp: &netproto.ChooseSkillResp{
+				PlayerId:       result.PlayerID,
+				ChoiceSequence: result.ChoiceSequence,
+				Accepted:       result.Accepted,
+				Granted:        result.Granted,
+				Message:        result.Message,
+			},
+		},
+	})
+	if err != nil {
+		s.logger.Printf("choose skill response failed player_id=%d err=%v", sess.PlayerID, err)
 	}
 }
 
@@ -234,13 +280,6 @@ func (s *Server) tickLoop(ctx context.Context, errCh chan<- error) {
 		case <-ticker.C:
 			s.world.Tick()
 			s.broadcastSnapshots()
-			if s.world.Running() {
-				s.gameOverSent.Store(false)
-				continue
-			}
-			if !s.gameOverSent.Swap(true) {
-				s.broadcastGameOver()
-			}
 		}
 	}
 }
@@ -251,7 +290,10 @@ func (s *Server) broadcastSnapshots() {
 		if !ok {
 			continue
 		}
-		snapshot := s.world.BuildSnapshotFor(sess.PlayerID)
+		snapshot := s.buildSnapshotForSession(sess, s.world.BuildSnapshotFor(sess.PlayerID))
+		if snapshot == nil {
+			continue
+		}
 		envelope := &netproto.UdpEnvelope{
 			SessionId: sess.SessionID,
 			Msg: &netproto.UdpEnvelope_Snapshot{
@@ -265,23 +307,6 @@ func (s *Server) broadcastSnapshots() {
 		}
 		if _, err := s.udpConn.WriteToUDP(payload, addr); err != nil {
 			s.logger.Printf("snapshot send failed player_id=%d err=%v", sess.PlayerID, err)
-		}
-	}
-}
-
-func (s *Server) broadcastGameOver() {
-	payload := s.world.GameOver()
-	for _, sess := range s.sessions.List() {
-		if sess.TCPConn == nil {
-			continue
-		}
-		err := transport.WriteTCPEnvelope(sess.TCPConn, &netproto.TcpEnvelope{
-			Msg: &netproto.TcpEnvelope_GameOver{
-				GameOver: payload,
-			},
-		})
-		if err != nil {
-			s.logger.Printf("game over send failed player_id=%d err=%v", sess.PlayerID, err)
 		}
 	}
 }

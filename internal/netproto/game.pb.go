@@ -29,6 +29,8 @@ const (
 	EntityKind_ENTITY_KIND_ENEMY         EntityKind = 2
 	EntityKind_ENTITY_KIND_BULLET_PLAYER EntityKind = 3
 	EntityKind_ENTITY_KIND_BULLET_ENEMY  EntityKind = 4
+	EntityKind_ENTITY_KIND_PICKUP_EXP    EntityKind = 5
+	EntityKind_ENTITY_KIND_PICKUP_SKILL  EntityKind = 6
 )
 
 // Enum value maps for EntityKind.
@@ -39,6 +41,8 @@ var (
 		2: "ENTITY_KIND_ENEMY",
 		3: "ENTITY_KIND_BULLET_PLAYER",
 		4: "ENTITY_KIND_BULLET_ENEMY",
+		5: "ENTITY_KIND_PICKUP_EXP",
+		6: "ENTITY_KIND_PICKUP_SKILL",
 	}
 	EntityKind_value = map[string]int32{
 		"ENTITY_KIND_UNKNOWN":       0,
@@ -46,6 +50,8 @@ var (
 		"ENTITY_KIND_ENEMY":         2,
 		"ENTITY_KIND_BULLET_PLAYER": 3,
 		"ENTITY_KIND_BULLET_ENEMY":  4,
+		"ENTITY_KIND_PICKUP_EXP":    5,
+		"ENTITY_KIND_PICKUP_SKILL":  6,
 	}
 )
 
@@ -74,6 +80,303 @@ func (x EntityKind) Number() protoreflect.EnumNumber {
 // Deprecated: Use EntityKind.Descriptor instead.
 func (EntityKind) EnumDescriptor() ([]byte, []int) {
 	return file_internal_netproto_game_proto_rawDescGZIP(), []int{0}
+}
+
+type EnemyClass int32
+
+const (
+	EnemyClass_ENEMY_CLASS_UNKNOWN EnemyClass = 0
+	EnemyClass_ENEMY_CLASS_GUNNER  EnemyClass = 1
+	EnemyClass_ENEMY_CLASS_BLADE   EnemyClass = 2
+)
+
+// Enum value maps for EnemyClass.
+var (
+	EnemyClass_name = map[int32]string{
+		0: "ENEMY_CLASS_UNKNOWN",
+		1: "ENEMY_CLASS_GUNNER",
+		2: "ENEMY_CLASS_BLADE",
+	}
+	EnemyClass_value = map[string]int32{
+		"ENEMY_CLASS_UNKNOWN": 0,
+		"ENEMY_CLASS_GUNNER":  1,
+		"ENEMY_CLASS_BLADE":   2,
+	}
+)
+
+func (x EnemyClass) Enum() *EnemyClass {
+	p := new(EnemyClass)
+	*p = x
+	return p
+}
+
+func (x EnemyClass) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EnemyClass) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_netproto_game_proto_enumTypes[1].Descriptor()
+}
+
+func (EnemyClass) Type() protoreflect.EnumType {
+	return &file_internal_netproto_game_proto_enumTypes[1]
+}
+
+func (x EnemyClass) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EnemyClass.Descriptor instead.
+func (EnemyClass) EnumDescriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{1}
+}
+
+type EnemyTier int32
+
+const (
+	EnemyTier_ENEMY_TIER_UNKNOWN EnemyTier = 0
+	EnemyTier_ENEMY_TIER_MINION  EnemyTier = 1
+	EnemyTier_ENEMY_TIER_ELITE   EnemyTier = 2
+	EnemyTier_ENEMY_TIER_BOSS    EnemyTier = 3
+)
+
+// Enum value maps for EnemyTier.
+var (
+	EnemyTier_name = map[int32]string{
+		0: "ENEMY_TIER_UNKNOWN",
+		1: "ENEMY_TIER_MINION",
+		2: "ENEMY_TIER_ELITE",
+		3: "ENEMY_TIER_BOSS",
+	}
+	EnemyTier_value = map[string]int32{
+		"ENEMY_TIER_UNKNOWN": 0,
+		"ENEMY_TIER_MINION":  1,
+		"ENEMY_TIER_ELITE":   2,
+		"ENEMY_TIER_BOSS":    3,
+	}
+)
+
+func (x EnemyTier) Enum() *EnemyTier {
+	p := new(EnemyTier)
+	*p = x
+	return p
+}
+
+func (x EnemyTier) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EnemyTier) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_netproto_game_proto_enumTypes[2].Descriptor()
+}
+
+func (EnemyTier) Type() protoreflect.EnumType {
+	return &file_internal_netproto_game_proto_enumTypes[2]
+}
+
+func (x EnemyTier) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EnemyTier.Descriptor instead.
+func (EnemyTier) EnumDescriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{2}
+}
+
+type BuffKind int32
+
+const (
+	BuffKind_BUFF_KIND_UNKNOWN BuffKind = 0
+	BuffKind_BUFF_KIND_POISON  BuffKind = 1
+	BuffKind_BUFF_KIND_CHILL   BuffKind = 2
+)
+
+// Enum value maps for BuffKind.
+var (
+	BuffKind_name = map[int32]string{
+		0: "BUFF_KIND_UNKNOWN",
+		1: "BUFF_KIND_POISON",
+		2: "BUFF_KIND_CHILL",
+	}
+	BuffKind_value = map[string]int32{
+		"BUFF_KIND_UNKNOWN": 0,
+		"BUFF_KIND_POISON":  1,
+		"BUFF_KIND_CHILL":   2,
+	}
+)
+
+func (x BuffKind) Enum() *BuffKind {
+	p := new(BuffKind)
+	*p = x
+	return p
+}
+
+func (x BuffKind) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (BuffKind) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_netproto_game_proto_enumTypes[3].Descriptor()
+}
+
+func (BuffKind) Type() protoreflect.EnumType {
+	return &file_internal_netproto_game_proto_enumTypes[3]
+}
+
+func (x BuffKind) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use BuffKind.Descriptor instead.
+func (BuffKind) EnumDescriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{3}
+}
+
+type BuffCategory int32
+
+const (
+	BuffCategory_BUFF_CATEGORY_UNKNOWN BuffCategory = 0
+	BuffCategory_BUFF_CATEGORY_DOT     BuffCategory = 1
+	BuffCategory_BUFF_CATEGORY_CONTROL BuffCategory = 2
+)
+
+// Enum value maps for BuffCategory.
+var (
+	BuffCategory_name = map[int32]string{
+		0: "BUFF_CATEGORY_UNKNOWN",
+		1: "BUFF_CATEGORY_DOT",
+		2: "BUFF_CATEGORY_CONTROL",
+	}
+	BuffCategory_value = map[string]int32{
+		"BUFF_CATEGORY_UNKNOWN": 0,
+		"BUFF_CATEGORY_DOT":     1,
+		"BUFF_CATEGORY_CONTROL": 2,
+	}
+)
+
+func (x BuffCategory) Enum() *BuffCategory {
+	p := new(BuffCategory)
+	*p = x
+	return p
+}
+
+func (x BuffCategory) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (BuffCategory) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_netproto_game_proto_enumTypes[4].Descriptor()
+}
+
+func (BuffCategory) Type() protoreflect.EnumType {
+	return &file_internal_netproto_game_proto_enumTypes[4]
+}
+
+func (x BuffCategory) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use BuffCategory.Descriptor instead.
+func (BuffCategory) EnumDescriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{4}
+}
+
+type ProjectileSubtype int32
+
+const (
+	ProjectileSubtype_PROJECTILE_SUBTYPE_UNKNOWN ProjectileSubtype = 0
+	ProjectileSubtype_PROJECTILE_SUBTYPE_NORMAL  ProjectileSubtype = 1
+	ProjectileSubtype_PROJECTILE_SUBTYPE_HOMING  ProjectileSubtype = 2
+)
+
+// Enum value maps for ProjectileSubtype.
+var (
+	ProjectileSubtype_name = map[int32]string{
+		0: "PROJECTILE_SUBTYPE_UNKNOWN",
+		1: "PROJECTILE_SUBTYPE_NORMAL",
+		2: "PROJECTILE_SUBTYPE_HOMING",
+	}
+	ProjectileSubtype_value = map[string]int32{
+		"PROJECTILE_SUBTYPE_UNKNOWN": 0,
+		"PROJECTILE_SUBTYPE_NORMAL":  1,
+		"PROJECTILE_SUBTYPE_HOMING":  2,
+	}
+)
+
+func (x ProjectileSubtype) Enum() *ProjectileSubtype {
+	p := new(ProjectileSubtype)
+	*p = x
+	return p
+}
+
+func (x ProjectileSubtype) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProjectileSubtype) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_netproto_game_proto_enumTypes[5].Descriptor()
+}
+
+func (ProjectileSubtype) Type() protoreflect.EnumType {
+	return &file_internal_netproto_game_proto_enumTypes[5]
+}
+
+func (x ProjectileSubtype) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProjectileSubtype.Descriptor instead.
+func (ProjectileSubtype) EnumDescriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{5}
+}
+
+type EnemyAggroState int32
+
+const (
+	EnemyAggroState_ENEMY_AGGRO_STATE_IDLE     EnemyAggroState = 0
+	EnemyAggroState_ENEMY_AGGRO_STATE_WATCHING EnemyAggroState = 1
+	EnemyAggroState_ENEMY_AGGRO_STATE_LOCKED   EnemyAggroState = 2
+)
+
+// Enum value maps for EnemyAggroState.
+var (
+	EnemyAggroState_name = map[int32]string{
+		0: "ENEMY_AGGRO_STATE_IDLE",
+		1: "ENEMY_AGGRO_STATE_WATCHING",
+		2: "ENEMY_AGGRO_STATE_LOCKED",
+	}
+	EnemyAggroState_value = map[string]int32{
+		"ENEMY_AGGRO_STATE_IDLE":     0,
+		"ENEMY_AGGRO_STATE_WATCHING": 1,
+		"ENEMY_AGGRO_STATE_LOCKED":   2,
+	}
+)
+
+func (x EnemyAggroState) Enum() *EnemyAggroState {
+	p := new(EnemyAggroState)
+	*p = x
+	return p
+}
+
+func (x EnemyAggroState) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EnemyAggroState) Descriptor() protoreflect.EnumDescriptor {
+	return file_internal_netproto_game_proto_enumTypes[6].Descriptor()
+}
+
+func (EnemyAggroState) Type() protoreflect.EnumType {
+	return &file_internal_netproto_game_proto_enumTypes[6]
+}
+
+func (x EnemyAggroState) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EnemyAggroState.Descriptor instead.
+func (EnemyAggroState) EnumDescriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{6}
 }
 
 type Vec2 struct {
@@ -240,6 +543,230 @@ func (x *JoinResp) GetTickHz() uint32 {
 	return 0
 }
 
+type RespawnReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RespawnReq) Reset() {
+	*x = RespawnReq{}
+	mi := &file_internal_netproto_game_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RespawnReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RespawnReq) ProtoMessage() {}
+
+func (x *RespawnReq) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RespawnReq.ProtoReflect.Descriptor instead.
+func (*RespawnReq) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{3}
+}
+
+type RespawnResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PlayerId      uint32                 `protobuf:"varint,1,opt,name=player_id,json=playerId,proto3" json:"player_id,omitempty"`
+	Accepted      bool                   `protobuf:"varint,2,opt,name=accepted,proto3" json:"accepted,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RespawnResp) Reset() {
+	*x = RespawnResp{}
+	mi := &file_internal_netproto_game_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RespawnResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RespawnResp) ProtoMessage() {}
+
+func (x *RespawnResp) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RespawnResp.ProtoReflect.Descriptor instead.
+func (*RespawnResp) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RespawnResp) GetPlayerId() uint32 {
+	if x != nil {
+		return x.PlayerId
+	}
+	return 0
+}
+
+func (x *RespawnResp) GetAccepted() bool {
+	if x != nil {
+		return x.Accepted
+	}
+	return false
+}
+
+func (x *RespawnResp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type ChooseSkillReq struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ChoiceSequence uint32                 `protobuf:"varint,1,opt,name=choice_sequence,json=choiceSequence,proto3" json:"choice_sequence,omitempty"`
+	SkillId        string                 `protobuf:"bytes,2,opt,name=skill_id,json=skillId,proto3" json:"skill_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ChooseSkillReq) Reset() {
+	*x = ChooseSkillReq{}
+	mi := &file_internal_netproto_game_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChooseSkillReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChooseSkillReq) ProtoMessage() {}
+
+func (x *ChooseSkillReq) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChooseSkillReq.ProtoReflect.Descriptor instead.
+func (*ChooseSkillReq) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ChooseSkillReq) GetChoiceSequence() uint32 {
+	if x != nil {
+		return x.ChoiceSequence
+	}
+	return 0
+}
+
+func (x *ChooseSkillReq) GetSkillId() string {
+	if x != nil {
+		return x.SkillId
+	}
+	return ""
+}
+
+type ChooseSkillResp struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	PlayerId       uint32                 `protobuf:"varint,1,opt,name=player_id,json=playerId,proto3" json:"player_id,omitempty"`
+	ChoiceSequence uint32                 `protobuf:"varint,2,opt,name=choice_sequence,json=choiceSequence,proto3" json:"choice_sequence,omitempty"`
+	Accepted       bool                   `protobuf:"varint,3,opt,name=accepted,proto3" json:"accepted,omitempty"`
+	Granted        bool                   `protobuf:"varint,4,opt,name=granted,proto3" json:"granted,omitempty"`
+	Message        string                 `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ChooseSkillResp) Reset() {
+	*x = ChooseSkillResp{}
+	mi := &file_internal_netproto_game_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChooseSkillResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChooseSkillResp) ProtoMessage() {}
+
+func (x *ChooseSkillResp) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChooseSkillResp.ProtoReflect.Descriptor instead.
+func (*ChooseSkillResp) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ChooseSkillResp) GetPlayerId() uint32 {
+	if x != nil {
+		return x.PlayerId
+	}
+	return 0
+}
+
+func (x *ChooseSkillResp) GetChoiceSequence() uint32 {
+	if x != nil {
+		return x.ChoiceSequence
+	}
+	return 0
+}
+
+func (x *ChooseSkillResp) GetAccepted() bool {
+	if x != nil {
+		return x.Accepted
+	}
+	return false
+}
+
+func (x *ChooseSkillResp) GetGranted() bool {
+	if x != nil {
+		return x.Granted
+	}
+	return false
+}
+
+func (x *ChooseSkillResp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type ErrorMsg struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          uint32                 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
@@ -250,7 +777,7 @@ type ErrorMsg struct {
 
 func (x *ErrorMsg) Reset() {
 	*x = ErrorMsg{}
-	mi := &file_internal_netproto_game_proto_msgTypes[3]
+	mi := &file_internal_netproto_game_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -262,7 +789,7 @@ func (x *ErrorMsg) String() string {
 func (*ErrorMsg) ProtoMessage() {}
 
 func (x *ErrorMsg) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[3]
+	mi := &file_internal_netproto_game_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +802,7 @@ func (x *ErrorMsg) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorMsg.ProtoReflect.Descriptor instead.
 func (*ErrorMsg) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{3}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ErrorMsg) GetCode() uint32 {
@@ -302,7 +829,7 @@ type GameOver struct {
 
 func (x *GameOver) Reset() {
 	*x = GameOver{}
-	mi := &file_internal_netproto_game_proto_msgTypes[4]
+	mi := &file_internal_netproto_game_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -314,7 +841,7 @@ func (x *GameOver) String() string {
 func (*GameOver) ProtoMessage() {}
 
 func (x *GameOver) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[4]
+	mi := &file_internal_netproto_game_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -327,7 +854,7 @@ func (x *GameOver) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GameOver.ProtoReflect.Descriptor instead.
 func (*GameOver) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{4}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GameOver) GetTick() uint32 {
@@ -352,6 +879,10 @@ type TcpEnvelope struct {
 	//	*TcpEnvelope_JoinResp
 	//	*TcpEnvelope_Error
 	//	*TcpEnvelope_GameOver
+	//	*TcpEnvelope_RespawnReq
+	//	*TcpEnvelope_RespawnResp
+	//	*TcpEnvelope_ChooseSkillReq
+	//	*TcpEnvelope_ChooseSkillResp
 	Msg           isTcpEnvelope_Msg `protobuf_oneof:"msg"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -359,7 +890,7 @@ type TcpEnvelope struct {
 
 func (x *TcpEnvelope) Reset() {
 	*x = TcpEnvelope{}
-	mi := &file_internal_netproto_game_proto_msgTypes[5]
+	mi := &file_internal_netproto_game_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -371,7 +902,7 @@ func (x *TcpEnvelope) String() string {
 func (*TcpEnvelope) ProtoMessage() {}
 
 func (x *TcpEnvelope) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[5]
+	mi := &file_internal_netproto_game_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -384,7 +915,7 @@ func (x *TcpEnvelope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TcpEnvelope.ProtoReflect.Descriptor instead.
 func (*TcpEnvelope) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{5}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *TcpEnvelope) GetMsg() isTcpEnvelope_Msg {
@@ -430,6 +961,42 @@ func (x *TcpEnvelope) GetGameOver() *GameOver {
 	return nil
 }
 
+func (x *TcpEnvelope) GetRespawnReq() *RespawnReq {
+	if x != nil {
+		if x, ok := x.Msg.(*TcpEnvelope_RespawnReq); ok {
+			return x.RespawnReq
+		}
+	}
+	return nil
+}
+
+func (x *TcpEnvelope) GetRespawnResp() *RespawnResp {
+	if x != nil {
+		if x, ok := x.Msg.(*TcpEnvelope_RespawnResp); ok {
+			return x.RespawnResp
+		}
+	}
+	return nil
+}
+
+func (x *TcpEnvelope) GetChooseSkillReq() *ChooseSkillReq {
+	if x != nil {
+		if x, ok := x.Msg.(*TcpEnvelope_ChooseSkillReq); ok {
+			return x.ChooseSkillReq
+		}
+	}
+	return nil
+}
+
+func (x *TcpEnvelope) GetChooseSkillResp() *ChooseSkillResp {
+	if x != nil {
+		if x, ok := x.Msg.(*TcpEnvelope_ChooseSkillResp); ok {
+			return x.ChooseSkillResp
+		}
+	}
+	return nil
+}
+
 type isTcpEnvelope_Msg interface {
 	isTcpEnvelope_Msg()
 }
@@ -450,6 +1017,22 @@ type TcpEnvelope_GameOver struct {
 	GameOver *GameOver `protobuf:"bytes,4,opt,name=game_over,json=gameOver,proto3,oneof"`
 }
 
+type TcpEnvelope_RespawnReq struct {
+	RespawnReq *RespawnReq `protobuf:"bytes,5,opt,name=respawn_req,json=respawnReq,proto3,oneof"`
+}
+
+type TcpEnvelope_RespawnResp struct {
+	RespawnResp *RespawnResp `protobuf:"bytes,6,opt,name=respawn_resp,json=respawnResp,proto3,oneof"`
+}
+
+type TcpEnvelope_ChooseSkillReq struct {
+	ChooseSkillReq *ChooseSkillReq `protobuf:"bytes,7,opt,name=choose_skill_req,json=chooseSkillReq,proto3,oneof"`
+}
+
+type TcpEnvelope_ChooseSkillResp struct {
+	ChooseSkillResp *ChooseSkillResp `protobuf:"bytes,8,opt,name=choose_skill_resp,json=chooseSkillResp,proto3,oneof"`
+}
+
 func (*TcpEnvelope_JoinReq) isTcpEnvelope_Msg() {}
 
 func (*TcpEnvelope_JoinResp) isTcpEnvelope_Msg() {}
@@ -457,6 +1040,14 @@ func (*TcpEnvelope_JoinResp) isTcpEnvelope_Msg() {}
 func (*TcpEnvelope_Error) isTcpEnvelope_Msg() {}
 
 func (*TcpEnvelope_GameOver) isTcpEnvelope_Msg() {}
+
+func (*TcpEnvelope_RespawnReq) isTcpEnvelope_Msg() {}
+
+func (*TcpEnvelope_RespawnResp) isTcpEnvelope_Msg() {}
+
+func (*TcpEnvelope_ChooseSkillReq) isTcpEnvelope_Msg() {}
+
+func (*TcpEnvelope_ChooseSkillResp) isTcpEnvelope_Msg() {}
 
 type UdpHello struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -467,7 +1058,7 @@ type UdpHello struct {
 
 func (x *UdpHello) Reset() {
 	*x = UdpHello{}
-	mi := &file_internal_netproto_game_proto_msgTypes[6]
+	mi := &file_internal_netproto_game_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -479,7 +1070,7 @@ func (x *UdpHello) String() string {
 func (*UdpHello) ProtoMessage() {}
 
 func (x *UdpHello) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[6]
+	mi := &file_internal_netproto_game_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -492,7 +1083,7 @@ func (x *UdpHello) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UdpHello.ProtoReflect.Descriptor instead.
 func (*UdpHello) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{6}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UdpHello) GetSessionId() uint64 {
@@ -503,20 +1094,22 @@ func (x *UdpHello) GetSessionId() uint64 {
 }
 
 type InputFrame struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	InputSeq      uint32                 `protobuf:"varint,1,opt,name=input_seq,json=inputSeq,proto3" json:"input_seq,omitempty"`
-	MoveX         int32                  `protobuf:"varint,2,opt,name=move_x,json=moveX,proto3" json:"move_x,omitempty"`
-	MoveY         int32                  `protobuf:"varint,3,opt,name=move_y,json=moveY,proto3" json:"move_y,omitempty"`
-	Fire          bool                   `protobuf:"varint,4,opt,name=fire,proto3" json:"fire,omitempty"`
-	AimDx         float32                `protobuf:"fixed32,5,opt,name=aim_dx,json=aimDx,proto3" json:"aim_dx,omitempty"`
-	AimDy         float32                `protobuf:"fixed32,6,opt,name=aim_dy,json=aimDy,proto3" json:"aim_dy,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	InputSeq          uint32                 `protobuf:"varint,1,opt,name=input_seq,json=inputSeq,proto3" json:"input_seq,omitempty"`
+	MoveX             int32                  `protobuf:"varint,2,opt,name=move_x,json=moveX,proto3" json:"move_x,omitempty"`
+	MoveY             int32                  `protobuf:"varint,3,opt,name=move_y,json=moveY,proto3" json:"move_y,omitempty"`
+	Fire              bool                   `protobuf:"varint,4,opt,name=fire,proto3" json:"fire,omitempty"`
+	AimDx             float32                `protobuf:"fixed32,5,opt,name=aim_dx,json=aimDx,proto3" json:"aim_dx,omitempty"`
+	AimDy             float32                `protobuf:"fixed32,6,opt,name=aim_dy,json=aimDy,proto3" json:"aim_dy,omitempty"`
+	Roll              bool                   `protobuf:"varint,7,opt,name=roll,proto3" json:"roll,omitempty"`
+	AckedSnapshotTick uint32                 `protobuf:"varint,8,opt,name=acked_snapshot_tick,json=ackedSnapshotTick,proto3" json:"acked_snapshot_tick,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *InputFrame) Reset() {
 	*x = InputFrame{}
-	mi := &file_internal_netproto_game_proto_msgTypes[7]
+	mi := &file_internal_netproto_game_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -528,7 +1121,7 @@ func (x *InputFrame) String() string {
 func (*InputFrame) ProtoMessage() {}
 
 func (x *InputFrame) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[7]
+	mi := &file_internal_netproto_game_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +1134,7 @@ func (x *InputFrame) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InputFrame.ProtoReflect.Descriptor instead.
 func (*InputFrame) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{7}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *InputFrame) GetInputSeq() uint32 {
@@ -586,22 +1179,277 @@ func (x *InputFrame) GetAimDy() float32 {
 	return 0
 }
 
-type EntityState struct {
+func (x *InputFrame) GetRoll() bool {
+	if x != nil {
+		return x.Roll
+	}
+	return false
+}
+
+func (x *InputFrame) GetAckedSnapshotTick() uint32 {
+	if x != nil {
+		return x.AckedSnapshotTick
+	}
+	return 0
+}
+
+type BuffState struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Kind                BuffKind               `protobuf:"varint,1,opt,name=kind,proto3,enum=game.BuffKind" json:"kind,omitempty"`
+	RemainingFrames     uint32                 `protobuf:"varint,2,opt,name=remaining_frames,json=remainingFrames,proto3" json:"remaining_frames,omitempty"`
+	TickIntervalFrames  uint32                 `protobuf:"varint,3,opt,name=tick_interval_frames,json=tickIntervalFrames,proto3" json:"tick_interval_frames,omitempty"`
+	TickFramesRemaining uint32                 `protobuf:"varint,4,opt,name=tick_frames_remaining,json=tickFramesRemaining,proto3" json:"tick_frames_remaining,omitempty"`
+	DamagePerTick       int32                  `protobuf:"varint,5,opt,name=damage_per_tick,json=damagePerTick,proto3" json:"damage_per_tick,omitempty"`
+	MoveSpeedMultiplier float32                `protobuf:"fixed32,6,opt,name=move_speed_multiplier,json=moveSpeedMultiplier,proto3" json:"move_speed_multiplier,omitempty"`
+	Category            BuffCategory           `protobuf:"varint,7,opt,name=category,proto3,enum=game.BuffCategory" json:"category,omitempty"`
+	Stacks              uint32                 `protobuf:"varint,8,opt,name=stacks,proto3" json:"stacks,omitempty"`
+	MaxStacks           uint32                 `protobuf:"varint,9,opt,name=max_stacks,json=maxStacks,proto3" json:"max_stacks,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *BuffState) Reset() {
+	*x = BuffState{}
+	mi := &file_internal_netproto_game_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuffState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuffState) ProtoMessage() {}
+
+func (x *BuffState) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuffState.ProtoReflect.Descriptor instead.
+func (*BuffState) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *BuffState) GetKind() BuffKind {
+	if x != nil {
+		return x.Kind
+	}
+	return BuffKind_BUFF_KIND_UNKNOWN
+}
+
+func (x *BuffState) GetRemainingFrames() uint32 {
+	if x != nil {
+		return x.RemainingFrames
+	}
+	return 0
+}
+
+func (x *BuffState) GetTickIntervalFrames() uint32 {
+	if x != nil {
+		return x.TickIntervalFrames
+	}
+	return 0
+}
+
+func (x *BuffState) GetTickFramesRemaining() uint32 {
+	if x != nil {
+		return x.TickFramesRemaining
+	}
+	return 0
+}
+
+func (x *BuffState) GetDamagePerTick() int32 {
+	if x != nil {
+		return x.DamagePerTick
+	}
+	return 0
+}
+
+func (x *BuffState) GetMoveSpeedMultiplier() float32 {
+	if x != nil {
+		return x.MoveSpeedMultiplier
+	}
+	return 0
+}
+
+func (x *BuffState) GetCategory() BuffCategory {
+	if x != nil {
+		return x.Category
+	}
+	return BuffCategory_BUFF_CATEGORY_UNKNOWN
+}
+
+func (x *BuffState) GetStacks() uint32 {
+	if x != nil {
+		return x.Stacks
+	}
+	return 0
+}
+
+func (x *BuffState) GetMaxStacks() uint32 {
+	if x != nil {
+		return x.MaxStacks
+	}
+	return 0
+}
+
+type SkillOption struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	NetId         uint32                 `protobuf:"varint,1,opt,name=net_id,json=netId,proto3" json:"net_id,omitempty"`
-	Kind          EntityKind             `protobuf:"varint,2,opt,name=kind,proto3,enum=game.EntityKind" json:"kind,omitempty"`
-	OwnerPlayerId uint32                 `protobuf:"varint,3,opt,name=owner_player_id,json=ownerPlayerId,proto3" json:"owner_player_id,omitempty"`
-	Pos           *Vec2                  `protobuf:"bytes,4,opt,name=pos,proto3" json:"pos,omitempty"`
-	Vel           *Vec2                  `protobuf:"bytes,5,opt,name=vel,proto3" json:"vel,omitempty"`
-	Hp            int32                  `protobuf:"varint,6,opt,name=hp,proto3" json:"hp,omitempty"`
-	Radius        float32                `protobuf:"fixed32,7,opt,name=radius,proto3" json:"radius,omitempty"`
+	SkillId       string                 `protobuf:"bytes,1,opt,name=skill_id,json=skillId,proto3" json:"skill_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *SkillOption) Reset() {
+	*x = SkillOption{}
+	mi := &file_internal_netproto_game_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkillOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkillOption) ProtoMessage() {}
+
+func (x *SkillOption) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SkillOption.ProtoReflect.Descriptor instead.
+func (*SkillOption) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SkillOption) GetSkillId() string {
+	if x != nil {
+		return x.SkillId
+	}
+	return ""
+}
+
+func (x *SkillOption) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SkillOption) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type PendingSkillChoice struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Sequence      uint32                 `protobuf:"varint,1,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	TargetLevel   uint32                 `protobuf:"varint,2,opt,name=target_level,json=targetLevel,proto3" json:"target_level,omitempty"`
+	Options       []*SkillOption         `protobuf:"bytes,3,rep,name=options,proto3" json:"options,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PendingSkillChoice) Reset() {
+	*x = PendingSkillChoice{}
+	mi := &file_internal_netproto_game_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PendingSkillChoice) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PendingSkillChoice) ProtoMessage() {}
+
+func (x *PendingSkillChoice) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PendingSkillChoice.ProtoReflect.Descriptor instead.
+func (*PendingSkillChoice) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *PendingSkillChoice) GetSequence() uint32 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *PendingSkillChoice) GetTargetLevel() uint32 {
+	if x != nil {
+		return x.TargetLevel
+	}
+	return 0
+}
+
+func (x *PendingSkillChoice) GetOptions() []*SkillOption {
+	if x != nil {
+		return x.Options
+	}
+	return nil
+}
+
+type EntityState struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	NetId                 uint32                 `protobuf:"varint,1,opt,name=net_id,json=netId,proto3" json:"net_id,omitempty"`
+	Kind                  EntityKind             `protobuf:"varint,2,opt,name=kind,proto3,enum=game.EntityKind" json:"kind,omitempty"`
+	OwnerPlayerId         uint32                 `protobuf:"varint,3,opt,name=owner_player_id,json=ownerPlayerId,proto3" json:"owner_player_id,omitempty"`
+	Pos                   *Vec2                  `protobuf:"bytes,4,opt,name=pos,proto3" json:"pos,omitempty"`
+	Vel                   *Vec2                  `protobuf:"bytes,5,opt,name=vel,proto3" json:"vel,omitempty"`
+	Hp                    int32                  `protobuf:"varint,6,opt,name=hp,proto3" json:"hp,omitempty"`
+	HpMax                 int32                  `protobuf:"varint,20,opt,name=hp_max,json=hpMax,proto3" json:"hp_max,omitempty"`
+	Radius                float32                `protobuf:"fixed32,7,opt,name=radius,proto3" json:"radius,omitempty"`
+	Exp                   int32                  `protobuf:"varint,8,opt,name=exp,proto3" json:"exp,omitempty"`
+	EnemyClass            EnemyClass             `protobuf:"varint,9,opt,name=enemy_class,json=enemyClass,proto3,enum=game.EnemyClass" json:"enemy_class,omitempty"`
+	Buffs                 []*BuffState           `protobuf:"bytes,10,rep,name=buffs,proto3" json:"buffs,omitempty"`
+	ProjectileSubtype     ProjectileSubtype      `protobuf:"varint,11,opt,name=projectile_subtype,json=projectileSubtype,proto3,enum=game.ProjectileSubtype" json:"projectile_subtype,omitempty"`
+	SkillId               string                 `protobuf:"bytes,12,opt,name=skill_id,json=skillId,proto3" json:"skill_id,omitempty"`
+	EnemyAggroState       EnemyAggroState        `protobuf:"varint,13,opt,name=enemy_aggro_state,json=enemyAggroState,proto3,enum=game.EnemyAggroState" json:"enemy_aggro_state,omitempty"`
+	AggroTargetPlayerId   uint32                 `protobuf:"varint,14,opt,name=aggro_target_player_id,json=aggroTargetPlayerId,proto3" json:"aggro_target_player_id,omitempty"`
+	AggroWatchFrames      uint32                 `protobuf:"varint,15,opt,name=aggro_watch_frames,json=aggroWatchFrames,proto3" json:"aggro_watch_frames,omitempty"`
+	AggroWatchTotalFrames uint32                 `protobuf:"varint,16,opt,name=aggro_watch_total_frames,json=aggroWatchTotalFrames,proto3" json:"aggro_watch_total_frames,omitempty"`
+	EnemyTier             EnemyTier              `protobuf:"varint,17,opt,name=enemy_tier,json=enemyTier,proto3,enum=game.EnemyTier" json:"enemy_tier,omitempty"`
+	SpawnRemainingFrames  uint32                 `protobuf:"varint,18,opt,name=spawn_remaining_frames,json=spawnRemainingFrames,proto3" json:"spawn_remaining_frames,omitempty"`
+	SpawnTotalFrames      uint32                 `protobuf:"varint,19,opt,name=spawn_total_frames,json=spawnTotalFrames,proto3" json:"spawn_total_frames,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
 func (x *EntityState) Reset() {
 	*x = EntityState{}
-	mi := &file_internal_netproto_game_proto_msgTypes[8]
+	mi := &file_internal_netproto_game_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -613,7 +1461,7 @@ func (x *EntityState) String() string {
 func (*EntityState) ProtoMessage() {}
 
 func (x *EntityState) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[8]
+	mi := &file_internal_netproto_game_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -626,7 +1474,7 @@ func (x *EntityState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntityState.ProtoReflect.Descriptor instead.
 func (*EntityState) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{8}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *EntityState) GetNetId() uint32 {
@@ -671,9 +1519,100 @@ func (x *EntityState) GetHp() int32 {
 	return 0
 }
 
+func (x *EntityState) GetHpMax() int32 {
+	if x != nil {
+		return x.HpMax
+	}
+	return 0
+}
+
 func (x *EntityState) GetRadius() float32 {
 	if x != nil {
 		return x.Radius
+	}
+	return 0
+}
+
+func (x *EntityState) GetExp() int32 {
+	if x != nil {
+		return x.Exp
+	}
+	return 0
+}
+
+func (x *EntityState) GetEnemyClass() EnemyClass {
+	if x != nil {
+		return x.EnemyClass
+	}
+	return EnemyClass_ENEMY_CLASS_UNKNOWN
+}
+
+func (x *EntityState) GetBuffs() []*BuffState {
+	if x != nil {
+		return x.Buffs
+	}
+	return nil
+}
+
+func (x *EntityState) GetProjectileSubtype() ProjectileSubtype {
+	if x != nil {
+		return x.ProjectileSubtype
+	}
+	return ProjectileSubtype_PROJECTILE_SUBTYPE_UNKNOWN
+}
+
+func (x *EntityState) GetSkillId() string {
+	if x != nil {
+		return x.SkillId
+	}
+	return ""
+}
+
+func (x *EntityState) GetEnemyAggroState() EnemyAggroState {
+	if x != nil {
+		return x.EnemyAggroState
+	}
+	return EnemyAggroState_ENEMY_AGGRO_STATE_IDLE
+}
+
+func (x *EntityState) GetAggroTargetPlayerId() uint32 {
+	if x != nil {
+		return x.AggroTargetPlayerId
+	}
+	return 0
+}
+
+func (x *EntityState) GetAggroWatchFrames() uint32 {
+	if x != nil {
+		return x.AggroWatchFrames
+	}
+	return 0
+}
+
+func (x *EntityState) GetAggroWatchTotalFrames() uint32 {
+	if x != nil {
+		return x.AggroWatchTotalFrames
+	}
+	return 0
+}
+
+func (x *EntityState) GetEnemyTier() EnemyTier {
+	if x != nil {
+		return x.EnemyTier
+	}
+	return EnemyTier_ENEMY_TIER_UNKNOWN
+}
+
+func (x *EntityState) GetSpawnRemainingFrames() uint32 {
+	if x != nil {
+		return x.SpawnRemainingFrames
+	}
+	return 0
+}
+
+func (x *EntityState) GetSpawnTotalFrames() uint32 {
+	if x != nil {
+		return x.SpawnTotalFrames
 	}
 	return 0
 }
@@ -694,7 +1633,7 @@ type ImpactEvent struct {
 
 func (x *ImpactEvent) Reset() {
 	*x = ImpactEvent{}
-	mi := &file_internal_netproto_game_proto_msgTypes[9]
+	mi := &file_internal_netproto_game_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -706,7 +1645,7 @@ func (x *ImpactEvent) String() string {
 func (*ImpactEvent) ProtoMessage() {}
 
 func (x *ImpactEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[9]
+	mi := &file_internal_netproto_game_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -719,7 +1658,7 @@ func (x *ImpactEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ImpactEvent.ProtoReflect.Descriptor instead.
 func (*ImpactEvent) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{9}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ImpactEvent) GetBulletNetId() uint32 {
@@ -778,6 +1717,182 @@ func (x *ImpactEvent) GetTargetDestroyed() bool {
 	return false
 }
 
+type PickupEvent struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CollectorNetId    uint32                 `protobuf:"varint,1,opt,name=collector_net_id,json=collectorNetId,proto3" json:"collector_net_id,omitempty"`
+	CollectorKind     EntityKind             `protobuf:"varint,2,opt,name=collector_kind,json=collectorKind,proto3,enum=game.EntityKind" json:"collector_kind,omitempty"`
+	CollectorPlayerId uint32                 `protobuf:"varint,3,opt,name=collector_player_id,json=collectorPlayerId,proto3" json:"collector_player_id,omitempty"`
+	PickupNetId       uint32                 `protobuf:"varint,4,opt,name=pickup_net_id,json=pickupNetId,proto3" json:"pickup_net_id,omitempty"`
+	PickupKind        EntityKind             `protobuf:"varint,5,opt,name=pickup_kind,json=pickupKind,proto3,enum=game.EntityKind" json:"pickup_kind,omitempty"`
+	Pos               *Vec2                  `protobuf:"bytes,6,opt,name=pos,proto3" json:"pos,omitempty"`
+	ExpValue          int32                  `protobuf:"varint,7,opt,name=exp_value,json=expValue,proto3" json:"exp_value,omitempty"`
+	SkillId           string                 `protobuf:"bytes,8,opt,name=skill_id,json=skillId,proto3" json:"skill_id,omitempty"`
+	Granted           bool                   `protobuf:"varint,9,opt,name=granted,proto3" json:"granted,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *PickupEvent) Reset() {
+	*x = PickupEvent{}
+	mi := &file_internal_netproto_game_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PickupEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PickupEvent) ProtoMessage() {}
+
+func (x *PickupEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PickupEvent.ProtoReflect.Descriptor instead.
+func (*PickupEvent) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *PickupEvent) GetCollectorNetId() uint32 {
+	if x != nil {
+		return x.CollectorNetId
+	}
+	return 0
+}
+
+func (x *PickupEvent) GetCollectorKind() EntityKind {
+	if x != nil {
+		return x.CollectorKind
+	}
+	return EntityKind_ENTITY_KIND_UNKNOWN
+}
+
+func (x *PickupEvent) GetCollectorPlayerId() uint32 {
+	if x != nil {
+		return x.CollectorPlayerId
+	}
+	return 0
+}
+
+func (x *PickupEvent) GetPickupNetId() uint32 {
+	if x != nil {
+		return x.PickupNetId
+	}
+	return 0
+}
+
+func (x *PickupEvent) GetPickupKind() EntityKind {
+	if x != nil {
+		return x.PickupKind
+	}
+	return EntityKind_ENTITY_KIND_UNKNOWN
+}
+
+func (x *PickupEvent) GetPos() *Vec2 {
+	if x != nil {
+		return x.Pos
+	}
+	return nil
+}
+
+func (x *PickupEvent) GetExpValue() int32 {
+	if x != nil {
+		return x.ExpValue
+	}
+	return 0
+}
+
+func (x *PickupEvent) GetSkillId() string {
+	if x != nil {
+		return x.SkillId
+	}
+	return ""
+}
+
+func (x *PickupEvent) GetGranted() bool {
+	if x != nil {
+		return x.Granted
+	}
+	return false
+}
+
+type HordeStatus struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Value           int32                  `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	Threshold       int32                  `protobuf:"varint,2,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	Active          bool                   `protobuf:"varint,3,opt,name=active,proto3" json:"active,omitempty"`
+	RemainingFrames uint32                 `protobuf:"varint,4,opt,name=remaining_frames,json=remainingFrames,proto3" json:"remaining_frames,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *HordeStatus) Reset() {
+	*x = HordeStatus{}
+	mi := &file_internal_netproto_game_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HordeStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HordeStatus) ProtoMessage() {}
+
+func (x *HordeStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_netproto_game_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HordeStatus.ProtoReflect.Descriptor instead.
+func (*HordeStatus) Descriptor() ([]byte, []int) {
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *HordeStatus) GetValue() int32 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+func (x *HordeStatus) GetThreshold() int32 {
+	if x != nil {
+		return x.Threshold
+	}
+	return 0
+}
+
+func (x *HordeStatus) GetActive() bool {
+	if x != nil {
+		return x.Active
+	}
+	return false
+}
+
+func (x *HordeStatus) GetRemainingFrames() uint32 {
+	if x != nil {
+		return x.RemainingFrames
+	}
+	return 0
+}
+
 type Snapshot struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	Tick                  uint32                 `protobuf:"varint,1,opt,name=tick,proto3" json:"tick,omitempty"`
@@ -786,13 +1901,20 @@ type Snapshot struct {
 	Running               bool                   `protobuf:"varint,4,opt,name=running,proto3" json:"running,omitempty"`
 	Entities              []*EntityState         `protobuf:"bytes,5,rep,name=entities,proto3" json:"entities,omitempty"`
 	Impacts               []*ImpactEvent         `protobuf:"bytes,6,rep,name=impacts,proto3" json:"impacts,omitempty"`
+	PlayerLevel           uint32                 `protobuf:"varint,7,opt,name=player_level,json=playerLevel,proto3" json:"player_level,omitempty"`
+	PendingSkillChoices   []*PendingSkillChoice  `protobuf:"bytes,8,rep,name=pending_skill_choices,json=pendingSkillChoices,proto3" json:"pending_skill_choices,omitempty"`
+	BaseTick              uint32                 `protobuf:"varint,9,opt,name=base_tick,json=baseTick,proto3" json:"base_tick,omitempty"`
+	IsFull                bool                   `protobuf:"varint,10,opt,name=is_full,json=isFull,proto3" json:"is_full,omitempty"`
+	RemovedNetIds         []uint32               `protobuf:"varint,11,rep,packed,name=removed_net_ids,json=removedNetIds,proto3" json:"removed_net_ids,omitempty"`
+	PickupEvents          []*PickupEvent         `protobuf:"bytes,12,rep,name=pickup_events,json=pickupEvents,proto3" json:"pickup_events,omitempty"`
+	Horde                 *HordeStatus           `protobuf:"bytes,13,opt,name=horde,proto3" json:"horde,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Snapshot) Reset() {
 	*x = Snapshot{}
-	mi := &file_internal_netproto_game_proto_msgTypes[10]
+	mi := &file_internal_netproto_game_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -804,7 +1926,7 @@ func (x *Snapshot) String() string {
 func (*Snapshot) ProtoMessage() {}
 
 func (x *Snapshot) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[10]
+	mi := &file_internal_netproto_game_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -817,7 +1939,7 @@ func (x *Snapshot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Snapshot.ProtoReflect.Descriptor instead.
 func (*Snapshot) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{10}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *Snapshot) GetTick() uint32 {
@@ -862,6 +1984,55 @@ func (x *Snapshot) GetImpacts() []*ImpactEvent {
 	return nil
 }
 
+func (x *Snapshot) GetPlayerLevel() uint32 {
+	if x != nil {
+		return x.PlayerLevel
+	}
+	return 0
+}
+
+func (x *Snapshot) GetPendingSkillChoices() []*PendingSkillChoice {
+	if x != nil {
+		return x.PendingSkillChoices
+	}
+	return nil
+}
+
+func (x *Snapshot) GetBaseTick() uint32 {
+	if x != nil {
+		return x.BaseTick
+	}
+	return 0
+}
+
+func (x *Snapshot) GetIsFull() bool {
+	if x != nil {
+		return x.IsFull
+	}
+	return false
+}
+
+func (x *Snapshot) GetRemovedNetIds() []uint32 {
+	if x != nil {
+		return x.RemovedNetIds
+	}
+	return nil
+}
+
+func (x *Snapshot) GetPickupEvents() []*PickupEvent {
+	if x != nil {
+		return x.PickupEvents
+	}
+	return nil
+}
+
+func (x *Snapshot) GetHorde() *HordeStatus {
+	if x != nil {
+		return x.Horde
+	}
+	return nil
+}
+
 type UdpEnvelope struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
 	SessionId uint64                 `protobuf:"varint,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
@@ -877,7 +2048,7 @@ type UdpEnvelope struct {
 
 func (x *UdpEnvelope) Reset() {
 	*x = UdpEnvelope{}
-	mi := &file_internal_netproto_game_proto_msgTypes[11]
+	mi := &file_internal_netproto_game_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -889,7 +2060,7 @@ func (x *UdpEnvelope) String() string {
 func (*UdpEnvelope) ProtoMessage() {}
 
 func (x *UdpEnvelope) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_netproto_game_proto_msgTypes[11]
+	mi := &file_internal_netproto_game_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -902,7 +2073,7 @@ func (x *UdpEnvelope) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UdpEnvelope.ProtoReflect.Descriptor instead.
 func (*UdpEnvelope) Descriptor() ([]byte, []int) {
-	return file_internal_netproto_game_proto_rawDescGZIP(), []int{11}
+	return file_internal_netproto_game_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UdpEnvelope) GetSessionId() uint64 {
@@ -983,22 +2154,42 @@ const file_internal_netproto_game_proto_rawDesc = "" +
 	"\n" +
 	"session_id\x18\x02 \x01(\x04R\tsessionId\x12\x19\n" +
 	"\budp_port\x18\x03 \x01(\rR\audpPort\x12\x17\n" +
-	"\atick_hz\x18\x04 \x01(\rR\x06tickHz\"8\n" +
+	"\atick_hz\x18\x04 \x01(\rR\x06tickHz\"\f\n" +
+	"\n" +
+	"RespawnReq\"`\n" +
+	"\vRespawnResp\x12\x1b\n" +
+	"\tplayer_id\x18\x01 \x01(\rR\bplayerId\x12\x1a\n" +
+	"\baccepted\x18\x02 \x01(\bR\baccepted\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"T\n" +
+	"\x0eChooseSkillReq\x12'\n" +
+	"\x0fchoice_sequence\x18\x01 \x01(\rR\x0echoiceSequence\x12\x19\n" +
+	"\bskill_id\x18\x02 \x01(\tR\askillId\"\xa7\x01\n" +
+	"\x0fChooseSkillResp\x12\x1b\n" +
+	"\tplayer_id\x18\x01 \x01(\rR\bplayerId\x12'\n" +
+	"\x0fchoice_sequence\x18\x02 \x01(\rR\x0echoiceSequence\x12\x1a\n" +
+	"\baccepted\x18\x03 \x01(\bR\baccepted\x12\x18\n" +
+	"\agranted\x18\x04 \x01(\bR\agranted\x12\x18\n" +
+	"\amessage\x18\x05 \x01(\tR\amessage\"8\n" +
 	"\bErrorMsg\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\rR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"4\n" +
 	"\bGameOver\x12\x12\n" +
 	"\x04tick\x18\x01 \x01(\rR\x04tick\x12\x14\n" +
-	"\x05score\x18\x02 \x01(\x05R\x05score\"\xc6\x01\n" +
+	"\x05score\x18\x02 \x01(\x05R\x05score\"\xba\x03\n" +
 	"\vTcpEnvelope\x12*\n" +
 	"\bjoin_req\x18\x01 \x01(\v2\r.game.JoinReqH\x00R\ajoinReq\x12-\n" +
 	"\tjoin_resp\x18\x02 \x01(\v2\x0e.game.JoinRespH\x00R\bjoinResp\x12&\n" +
 	"\x05error\x18\x03 \x01(\v2\x0e.game.ErrorMsgH\x00R\x05error\x12-\n" +
-	"\tgame_over\x18\x04 \x01(\v2\x0e.game.GameOverH\x00R\bgameOverB\x05\n" +
+	"\tgame_over\x18\x04 \x01(\v2\x0e.game.GameOverH\x00R\bgameOver\x123\n" +
+	"\vrespawn_req\x18\x05 \x01(\v2\x10.game.RespawnReqH\x00R\n" +
+	"respawnReq\x126\n" +
+	"\frespawn_resp\x18\x06 \x01(\v2\x11.game.RespawnRespH\x00R\vrespawnResp\x12@\n" +
+	"\x10choose_skill_req\x18\a \x01(\v2\x14.game.ChooseSkillReqH\x00R\x0echooseSkillReq\x12C\n" +
+	"\x11choose_skill_resp\x18\b \x01(\v2\x15.game.ChooseSkillRespH\x00R\x0fchooseSkillRespB\x05\n" +
 	"\x03msg\")\n" +
 	"\bUdpHello\x12\x1d\n" +
 	"\n" +
-	"session_id\x18\x01 \x01(\x04R\tsessionId\"\x99\x01\n" +
+	"session_id\x18\x01 \x01(\x04R\tsessionId\"\xdd\x01\n" +
 	"\n" +
 	"InputFrame\x12\x1b\n" +
 	"\tinput_seq\x18\x01 \x01(\rR\binputSeq\x12\x15\n" +
@@ -1006,7 +2197,28 @@ const file_internal_netproto_game_proto_rawDesc = "" +
 	"\x06move_y\x18\x03 \x01(\x05R\x05moveY\x12\x12\n" +
 	"\x04fire\x18\x04 \x01(\bR\x04fire\x12\x15\n" +
 	"\x06aim_dx\x18\x05 \x01(\x02R\x05aimDx\x12\x15\n" +
-	"\x06aim_dy\x18\x06 \x01(\x02R\x05aimDy\"\xd6\x01\n" +
+	"\x06aim_dy\x18\x06 \x01(\x02R\x05aimDy\x12\x12\n" +
+	"\x04roll\x18\a \x01(\bR\x04roll\x12.\n" +
+	"\x13acked_snapshot_tick\x18\b \x01(\rR\x11ackedSnapshotTick\"\x83\x03\n" +
+	"\tBuffState\x12\"\n" +
+	"\x04kind\x18\x01 \x01(\x0e2\x0e.game.BuffKindR\x04kind\x12)\n" +
+	"\x10remaining_frames\x18\x02 \x01(\rR\x0fremainingFrames\x120\n" +
+	"\x14tick_interval_frames\x18\x03 \x01(\rR\x12tickIntervalFrames\x122\n" +
+	"\x15tick_frames_remaining\x18\x04 \x01(\rR\x13tickFramesRemaining\x12&\n" +
+	"\x0fdamage_per_tick\x18\x05 \x01(\x05R\rdamagePerTick\x122\n" +
+	"\x15move_speed_multiplier\x18\x06 \x01(\x02R\x13moveSpeedMultiplier\x12.\n" +
+	"\bcategory\x18\a \x01(\x0e2\x12.game.BuffCategoryR\bcategory\x12\x16\n" +
+	"\x06stacks\x18\b \x01(\rR\x06stacks\x12\x1d\n" +
+	"\n" +
+	"max_stacks\x18\t \x01(\rR\tmaxStacks\"^\n" +
+	"\vSkillOption\x12\x19\n" +
+	"\bskill_id\x18\x01 \x01(\tR\askillId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\x80\x01\n" +
+	"\x12PendingSkillChoice\x12\x1a\n" +
+	"\bsequence\x18\x01 \x01(\rR\bsequence\x12!\n" +
+	"\ftarget_level\x18\x02 \x01(\rR\vtargetLevel\x12+\n" +
+	"\aoptions\x18\x03 \x03(\v2\x11.game.SkillOptionR\aoptions\"\xaf\x06\n" +
 	"\vEntityState\x12\x15\n" +
 	"\x06net_id\x18\x01 \x01(\rR\x05netId\x12$\n" +
 	"\x04kind\x18\x02 \x01(\x0e2\x10.game.EntityKindR\x04kind\x12&\n" +
@@ -1015,8 +2227,24 @@ const file_internal_netproto_game_proto_rawDesc = "" +
 	".game.Vec2R\x03pos\x12\x1c\n" +
 	"\x03vel\x18\x05 \x01(\v2\n" +
 	".game.Vec2R\x03vel\x12\x0e\n" +
-	"\x02hp\x18\x06 \x01(\x05R\x02hp\x12\x16\n" +
-	"\x06radius\x18\a \x01(\x02R\x06radius\"\xc6\x02\n" +
+	"\x02hp\x18\x06 \x01(\x05R\x02hp\x12\x15\n" +
+	"\x06hp_max\x18\x14 \x01(\x05R\x05hpMax\x12\x16\n" +
+	"\x06radius\x18\a \x01(\x02R\x06radius\x12\x10\n" +
+	"\x03exp\x18\b \x01(\x05R\x03exp\x121\n" +
+	"\venemy_class\x18\t \x01(\x0e2\x10.game.EnemyClassR\n" +
+	"enemyClass\x12%\n" +
+	"\x05buffs\x18\n" +
+	" \x03(\v2\x0f.game.BuffStateR\x05buffs\x12F\n" +
+	"\x12projectile_subtype\x18\v \x01(\x0e2\x17.game.ProjectileSubtypeR\x11projectileSubtype\x12\x19\n" +
+	"\bskill_id\x18\f \x01(\tR\askillId\x12A\n" +
+	"\x11enemy_aggro_state\x18\r \x01(\x0e2\x15.game.EnemyAggroStateR\x0fenemyAggroState\x123\n" +
+	"\x16aggro_target_player_id\x18\x0e \x01(\rR\x13aggroTargetPlayerId\x12,\n" +
+	"\x12aggro_watch_frames\x18\x0f \x01(\rR\x10aggroWatchFrames\x127\n" +
+	"\x18aggro_watch_total_frames\x18\x10 \x01(\rR\x15aggroWatchTotalFrames\x12.\n" +
+	"\n" +
+	"enemy_tier\x18\x11 \x01(\x0e2\x0f.game.EnemyTierR\tenemyTier\x124\n" +
+	"\x16spawn_remaining_frames\x18\x12 \x01(\rR\x14spawnRemainingFrames\x12,\n" +
+	"\x12spawn_total_frames\x18\x13 \x01(\rR\x10spawnTotalFrames\"\xc6\x02\n" +
 	"\vImpactEvent\x12\"\n" +
 	"\rbullet_net_id\x18\x01 \x01(\rR\vbulletNetId\x121\n" +
 	"\vbullet_kind\x18\x02 \x01(\x0e2\x10.game.EntityKindR\n" +
@@ -1028,14 +2256,39 @@ const file_internal_netproto_game_proto_rawDesc = "" +
 	"\x03pos\x18\x06 \x01(\v2\n" +
 	".game.Vec2R\x03pos\x12\x16\n" +
 	"\x06damage\x18\a \x01(\x05R\x06damage\x12)\n" +
-	"\x10target_destroyed\x18\b \x01(\bR\x0ftargetDestroyed\"\xe3\x01\n" +
+	"\x10target_destroyed\x18\b \x01(\bR\x0ftargetDestroyed\"\xe7\x02\n" +
+	"\vPickupEvent\x12(\n" +
+	"\x10collector_net_id\x18\x01 \x01(\rR\x0ecollectorNetId\x127\n" +
+	"\x0ecollector_kind\x18\x02 \x01(\x0e2\x10.game.EntityKindR\rcollectorKind\x12.\n" +
+	"\x13collector_player_id\x18\x03 \x01(\rR\x11collectorPlayerId\x12\"\n" +
+	"\rpickup_net_id\x18\x04 \x01(\rR\vpickupNetId\x121\n" +
+	"\vpickup_kind\x18\x05 \x01(\x0e2\x10.game.EntityKindR\n" +
+	"pickupKind\x12\x1c\n" +
+	"\x03pos\x18\x06 \x01(\v2\n" +
+	".game.Vec2R\x03pos\x12\x1b\n" +
+	"\texp_value\x18\a \x01(\x05R\bexpValue\x12\x19\n" +
+	"\bskill_id\x18\b \x01(\tR\askillId\x12\x18\n" +
+	"\agranted\x18\t \x01(\bR\agranted\"\x84\x01\n" +
+	"\vHordeStatus\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\x05R\x05value\x12\x1c\n" +
+	"\tthreshold\x18\x02 \x01(\x05R\tthreshold\x12\x16\n" +
+	"\x06active\x18\x03 \x01(\bR\x06active\x12)\n" +
+	"\x10remaining_frames\x18\x04 \x01(\rR\x0fremainingFrames\"\x93\x04\n" +
 	"\bSnapshot\x12\x12\n" +
 	"\x04tick\x18\x01 \x01(\rR\x04tick\x127\n" +
 	"\x18last_processed_input_seq\x18\x02 \x01(\rR\x15lastProcessedInputSeq\x12\x14\n" +
 	"\x05score\x18\x03 \x01(\x05R\x05score\x12\x18\n" +
 	"\arunning\x18\x04 \x01(\bR\arunning\x12-\n" +
 	"\bentities\x18\x05 \x03(\v2\x11.game.EntityStateR\bentities\x12+\n" +
-	"\aimpacts\x18\x06 \x03(\v2\x11.game.ImpactEventR\aimpacts\"\xb3\x01\n" +
+	"\aimpacts\x18\x06 \x03(\v2\x11.game.ImpactEventR\aimpacts\x12!\n" +
+	"\fplayer_level\x18\a \x01(\rR\vplayerLevel\x12L\n" +
+	"\x15pending_skill_choices\x18\b \x03(\v2\x18.game.PendingSkillChoiceR\x13pendingSkillChoices\x12\x1b\n" +
+	"\tbase_tick\x18\t \x01(\rR\bbaseTick\x12\x17\n" +
+	"\ais_full\x18\n" +
+	" \x01(\bR\x06isFull\x12&\n" +
+	"\x0fremoved_net_ids\x18\v \x03(\rR\rremovedNetIds\x126\n" +
+	"\rpickup_events\x18\f \x03(\v2\x11.game.PickupEventR\fpickupEvents\x12'\n" +
+	"\x05horde\x18\r \x01(\v2\x11.game.HordeStatusR\x05horde\"\xb3\x01\n" +
 	"\vUdpEnvelope\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\x04R\tsessionId\x12&\n" +
@@ -1043,14 +2296,42 @@ const file_internal_netproto_game_proto_rawDesc = "" +
 	" \x01(\v2\x0e.game.UdpHelloH\x00R\x05hello\x12(\n" +
 	"\x05input\x18\v \x01(\v2\x10.game.InputFrameH\x00R\x05input\x12,\n" +
 	"\bsnapshot\x18\f \x01(\v2\x0e.game.SnapshotH\x00R\bsnapshotB\x05\n" +
-	"\x03msg*\x91\x01\n" +
+	"\x03msg*\xcb\x01\n" +
 	"\n" +
 	"EntityKind\x12\x17\n" +
 	"\x13ENTITY_KIND_UNKNOWN\x10\x00\x12\x16\n" +
 	"\x12ENTITY_KIND_PLAYER\x10\x01\x12\x15\n" +
 	"\x11ENTITY_KIND_ENEMY\x10\x02\x12\x1d\n" +
 	"\x19ENTITY_KIND_BULLET_PLAYER\x10\x03\x12\x1c\n" +
-	"\x18ENTITY_KIND_BULLET_ENEMY\x10\x04B&Z$agentDemo/internal/netproto;netprotob\x06proto3"
+	"\x18ENTITY_KIND_BULLET_ENEMY\x10\x04\x12\x1a\n" +
+	"\x16ENTITY_KIND_PICKUP_EXP\x10\x05\x12\x1c\n" +
+	"\x18ENTITY_KIND_PICKUP_SKILL\x10\x06*T\n" +
+	"\n" +
+	"EnemyClass\x12\x17\n" +
+	"\x13ENEMY_CLASS_UNKNOWN\x10\x00\x12\x16\n" +
+	"\x12ENEMY_CLASS_GUNNER\x10\x01\x12\x15\n" +
+	"\x11ENEMY_CLASS_BLADE\x10\x02*e\n" +
+	"\tEnemyTier\x12\x16\n" +
+	"\x12ENEMY_TIER_UNKNOWN\x10\x00\x12\x15\n" +
+	"\x11ENEMY_TIER_MINION\x10\x01\x12\x14\n" +
+	"\x10ENEMY_TIER_ELITE\x10\x02\x12\x13\n" +
+	"\x0fENEMY_TIER_BOSS\x10\x03*L\n" +
+	"\bBuffKind\x12\x15\n" +
+	"\x11BUFF_KIND_UNKNOWN\x10\x00\x12\x14\n" +
+	"\x10BUFF_KIND_POISON\x10\x01\x12\x13\n" +
+	"\x0fBUFF_KIND_CHILL\x10\x02*[\n" +
+	"\fBuffCategory\x12\x19\n" +
+	"\x15BUFF_CATEGORY_UNKNOWN\x10\x00\x12\x15\n" +
+	"\x11BUFF_CATEGORY_DOT\x10\x01\x12\x19\n" +
+	"\x15BUFF_CATEGORY_CONTROL\x10\x02*q\n" +
+	"\x11ProjectileSubtype\x12\x1e\n" +
+	"\x1aPROJECTILE_SUBTYPE_UNKNOWN\x10\x00\x12\x1d\n" +
+	"\x19PROJECTILE_SUBTYPE_NORMAL\x10\x01\x12\x1d\n" +
+	"\x19PROJECTILE_SUBTYPE_HOMING\x10\x02*k\n" +
+	"\x0fEnemyAggroState\x12\x1a\n" +
+	"\x16ENEMY_AGGRO_STATE_IDLE\x10\x00\x12\x1e\n" +
+	"\x1aENEMY_AGGRO_STATE_WATCHING\x10\x01\x12\x1c\n" +
+	"\x18ENEMY_AGGRO_STATE_LOCKED\x10\x02B&Z$agentDemo/internal/netproto;netprotob\x06proto3"
 
 var (
 	file_internal_netproto_game_proto_rawDescOnce sync.Once
@@ -1064,44 +2345,77 @@ func file_internal_netproto_game_proto_rawDescGZIP() []byte {
 	return file_internal_netproto_game_proto_rawDescData
 }
 
-var file_internal_netproto_game_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_internal_netproto_game_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_internal_netproto_game_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
+var file_internal_netproto_game_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_internal_netproto_game_proto_goTypes = []any{
-	(EntityKind)(0),     // 0: game.EntityKind
-	(*Vec2)(nil),        // 1: game.Vec2
-	(*JoinReq)(nil),     // 2: game.JoinReq
-	(*JoinResp)(nil),    // 3: game.JoinResp
-	(*ErrorMsg)(nil),    // 4: game.ErrorMsg
-	(*GameOver)(nil),    // 5: game.GameOver
-	(*TcpEnvelope)(nil), // 6: game.TcpEnvelope
-	(*UdpHello)(nil),    // 7: game.UdpHello
-	(*InputFrame)(nil),  // 8: game.InputFrame
-	(*EntityState)(nil), // 9: game.EntityState
-	(*ImpactEvent)(nil), // 10: game.ImpactEvent
-	(*Snapshot)(nil),    // 11: game.Snapshot
-	(*UdpEnvelope)(nil), // 12: game.UdpEnvelope
+	(EntityKind)(0),            // 0: game.EntityKind
+	(EnemyClass)(0),            // 1: game.EnemyClass
+	(EnemyTier)(0),             // 2: game.EnemyTier
+	(BuffKind)(0),              // 3: game.BuffKind
+	(BuffCategory)(0),          // 4: game.BuffCategory
+	(ProjectileSubtype)(0),     // 5: game.ProjectileSubtype
+	(EnemyAggroState)(0),       // 6: game.EnemyAggroState
+	(*Vec2)(nil),               // 7: game.Vec2
+	(*JoinReq)(nil),            // 8: game.JoinReq
+	(*JoinResp)(nil),           // 9: game.JoinResp
+	(*RespawnReq)(nil),         // 10: game.RespawnReq
+	(*RespawnResp)(nil),        // 11: game.RespawnResp
+	(*ChooseSkillReq)(nil),     // 12: game.ChooseSkillReq
+	(*ChooseSkillResp)(nil),    // 13: game.ChooseSkillResp
+	(*ErrorMsg)(nil),           // 14: game.ErrorMsg
+	(*GameOver)(nil),           // 15: game.GameOver
+	(*TcpEnvelope)(nil),        // 16: game.TcpEnvelope
+	(*UdpHello)(nil),           // 17: game.UdpHello
+	(*InputFrame)(nil),         // 18: game.InputFrame
+	(*BuffState)(nil),          // 19: game.BuffState
+	(*SkillOption)(nil),        // 20: game.SkillOption
+	(*PendingSkillChoice)(nil), // 21: game.PendingSkillChoice
+	(*EntityState)(nil),        // 22: game.EntityState
+	(*ImpactEvent)(nil),        // 23: game.ImpactEvent
+	(*PickupEvent)(nil),        // 24: game.PickupEvent
+	(*HordeStatus)(nil),        // 25: game.HordeStatus
+	(*Snapshot)(nil),           // 26: game.Snapshot
+	(*UdpEnvelope)(nil),        // 27: game.UdpEnvelope
 }
 var file_internal_netproto_game_proto_depIdxs = []int32{
-	2,  // 0: game.TcpEnvelope.join_req:type_name -> game.JoinReq
-	3,  // 1: game.TcpEnvelope.join_resp:type_name -> game.JoinResp
-	4,  // 2: game.TcpEnvelope.error:type_name -> game.ErrorMsg
-	5,  // 3: game.TcpEnvelope.game_over:type_name -> game.GameOver
-	0,  // 4: game.EntityState.kind:type_name -> game.EntityKind
-	1,  // 5: game.EntityState.pos:type_name -> game.Vec2
-	1,  // 6: game.EntityState.vel:type_name -> game.Vec2
-	0,  // 7: game.ImpactEvent.bullet_kind:type_name -> game.EntityKind
-	0,  // 8: game.ImpactEvent.target_kind:type_name -> game.EntityKind
-	1,  // 9: game.ImpactEvent.pos:type_name -> game.Vec2
-	9,  // 10: game.Snapshot.entities:type_name -> game.EntityState
-	10, // 11: game.Snapshot.impacts:type_name -> game.ImpactEvent
-	7,  // 12: game.UdpEnvelope.hello:type_name -> game.UdpHello
-	8,  // 13: game.UdpEnvelope.input:type_name -> game.InputFrame
-	11, // 14: game.UdpEnvelope.snapshot:type_name -> game.Snapshot
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	8,  // 0: game.TcpEnvelope.join_req:type_name -> game.JoinReq
+	9,  // 1: game.TcpEnvelope.join_resp:type_name -> game.JoinResp
+	14, // 2: game.TcpEnvelope.error:type_name -> game.ErrorMsg
+	15, // 3: game.TcpEnvelope.game_over:type_name -> game.GameOver
+	10, // 4: game.TcpEnvelope.respawn_req:type_name -> game.RespawnReq
+	11, // 5: game.TcpEnvelope.respawn_resp:type_name -> game.RespawnResp
+	12, // 6: game.TcpEnvelope.choose_skill_req:type_name -> game.ChooseSkillReq
+	13, // 7: game.TcpEnvelope.choose_skill_resp:type_name -> game.ChooseSkillResp
+	3,  // 8: game.BuffState.kind:type_name -> game.BuffKind
+	4,  // 9: game.BuffState.category:type_name -> game.BuffCategory
+	20, // 10: game.PendingSkillChoice.options:type_name -> game.SkillOption
+	0,  // 11: game.EntityState.kind:type_name -> game.EntityKind
+	7,  // 12: game.EntityState.pos:type_name -> game.Vec2
+	7,  // 13: game.EntityState.vel:type_name -> game.Vec2
+	1,  // 14: game.EntityState.enemy_class:type_name -> game.EnemyClass
+	19, // 15: game.EntityState.buffs:type_name -> game.BuffState
+	5,  // 16: game.EntityState.projectile_subtype:type_name -> game.ProjectileSubtype
+	6,  // 17: game.EntityState.enemy_aggro_state:type_name -> game.EnemyAggroState
+	2,  // 18: game.EntityState.enemy_tier:type_name -> game.EnemyTier
+	0,  // 19: game.ImpactEvent.bullet_kind:type_name -> game.EntityKind
+	0,  // 20: game.ImpactEvent.target_kind:type_name -> game.EntityKind
+	7,  // 21: game.ImpactEvent.pos:type_name -> game.Vec2
+	0,  // 22: game.PickupEvent.collector_kind:type_name -> game.EntityKind
+	0,  // 23: game.PickupEvent.pickup_kind:type_name -> game.EntityKind
+	7,  // 24: game.PickupEvent.pos:type_name -> game.Vec2
+	22, // 25: game.Snapshot.entities:type_name -> game.EntityState
+	23, // 26: game.Snapshot.impacts:type_name -> game.ImpactEvent
+	21, // 27: game.Snapshot.pending_skill_choices:type_name -> game.PendingSkillChoice
+	24, // 28: game.Snapshot.pickup_events:type_name -> game.PickupEvent
+	25, // 29: game.Snapshot.horde:type_name -> game.HordeStatus
+	17, // 30: game.UdpEnvelope.hello:type_name -> game.UdpHello
+	18, // 31: game.UdpEnvelope.input:type_name -> game.InputFrame
+	26, // 32: game.UdpEnvelope.snapshot:type_name -> game.Snapshot
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_internal_netproto_game_proto_init() }
@@ -1109,13 +2423,17 @@ func file_internal_netproto_game_proto_init() {
 	if File_internal_netproto_game_proto != nil {
 		return
 	}
-	file_internal_netproto_game_proto_msgTypes[5].OneofWrappers = []any{
+	file_internal_netproto_game_proto_msgTypes[9].OneofWrappers = []any{
 		(*TcpEnvelope_JoinReq)(nil),
 		(*TcpEnvelope_JoinResp)(nil),
 		(*TcpEnvelope_Error)(nil),
 		(*TcpEnvelope_GameOver)(nil),
+		(*TcpEnvelope_RespawnReq)(nil),
+		(*TcpEnvelope_RespawnResp)(nil),
+		(*TcpEnvelope_ChooseSkillReq)(nil),
+		(*TcpEnvelope_ChooseSkillResp)(nil),
 	}
-	file_internal_netproto_game_proto_msgTypes[11].OneofWrappers = []any{
+	file_internal_netproto_game_proto_msgTypes[20].OneofWrappers = []any{
 		(*UdpEnvelope_Hello)(nil),
 		(*UdpEnvelope_Input)(nil),
 		(*UdpEnvelope_Snapshot)(nil),
@@ -1125,8 +2443,8 @@ func file_internal_netproto_game_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_netproto_game_proto_rawDesc), len(file_internal_netproto_game_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   12,
+			NumEnums:      7,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
